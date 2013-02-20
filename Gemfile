@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'http://dev-utility-lx07.amdc.mckinsey.com'
 
 gem 'rails', '3.2.11'
 
@@ -6,6 +7,8 @@ gem 'rails', '3.2.11'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
+gem 'distribute' ,'0.4.1'
+gem 'capistrano'
 
 
 # Gems used only for assets and not required
