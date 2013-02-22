@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script
+src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false">
+</script>
+
+<script>
+var infowindow = null;
+    $(document).ready(function () { initialize();  });
+ var address ;
+  
+   
+ function center()
+ {
+   
+  name=document.getElementById("name").value;
+    alert(name);
+     $.ajax({
+    url: '/colleagues/search?search='+name,
+    error: function (XMLHttpRequest, textStatus, errorThrown) {
+      alert("Something went wrong!! Please try again later.");
+                
+    },
+    success: function(data){
+    jQuery("#search_user").html(data);
+    },
+    type: "get"
+  });  
+     
+address="<%= @location %>"
+    alert(address);
+   initialize();
+ }
+    function initialize() {
+
+        var centerMap = new google.maps.LatLng(0,0);
+
+        var myOptions = {
+            zoom: 2,
+            center: centerMap,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+        setMarkers(map, sites);
+        infowindow = new google.maps.InfoWindow({
+                content: "loading..."
+            });
+
+        var bikeLayer = new google.maps.BicyclingLayer();
+        bikeLayer.setMap(map);
+
+          geocoder = new google.maps.Geocoder();
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map, 
+            position: results[0].geometry.location
+        });
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+    }
+var addressField = document.getElementById('search_address');
+var geocoder = new google.maps.Geocoder();
+
+var countmumbai= '<%= @countmum-%>'
+var namemumbai='<%= user=Colleague.where(:location=> "mumbai").select(:name).sample(5) 
+list=[]
+  user.each do |username| 
+ list<<username.name
+  
+ end -%>'
+ var namemumbai='<%= list[0] -%>'
+
+var countgurgaon= '<%= Colleague.where(:location=> "gurgaon").count -%>'
+var countnewyork= '<%= Colleague.where(:location=> "new york").count -%>'
+    var sites = [
+    ['Mumbai', 19.0759837, 72.8776559, 4,"<div style='background-color:#F3E2A9;text-align:center'><b> Number of employees in Mumbai="+countmumbai+"<br/>"+namemumbai+"<br/><a href='Colleague/list?loc=mumbai'>View full List</a></div>"],
+    ['Gurgaon', 28.4594965, 77.0266383, 2,"<div style='background-color:#F3E2A9;text-align:center'><b> Number of employees in gurgaon="+countgurgaon+"<br/><a href='Colleague/list?loc=gurgaon'>View full List</a>"],
+      ['New York',40.7143528, -74.0059731, 2,"<div style='background-color:#F3E2A9;text-align:center'><b> Number of employees in newyork="+countnewyork+"<br/><a href='Colleague/list?loc=new york'>View full List</a>"]
+    
+];
+
+
+
+    function setMarkers(map, markers) {
+
+        for (var i = 0; i < markers.length; i++) {
+            var sites = markers[i];
+            var siteLatLng = new google.maps.LatLng(sites[1], sites[2]);
+            var marker = new google.maps.Marker({
+                position: siteLatLng,
+
+                map: map,
+
+                title: sites[0],
+                zIndex: sites[3],
+                html: sites[4]
+            });
+
+            var contentString = "Some content";
+
+            google.maps.event.addListener(marker, "click", function () {
+               
+                infowindow.setContent(this.html);
+                infowindow.open(map, this);
+               
+              map.setCenter(this.getPosition());
+            });
+        }
+    }
+</script>
+</head>
+
+<body>
+    <div id="map_canvas" style="width: 1000px; height: 500px;"></div>
+<div id="search_user">
+<input type="button" value="search" onclick="center()">
+</div>
+<input type="text" id="name">
+
+ 
+</body>
+</html>
+
+
+
