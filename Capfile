@@ -39,8 +39,8 @@ end
 
 after "deploy:update_code" do
   run <<-CMD
-  #cd #{current_release} &&
-   #RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace
+  cd #{current_release} &&
+   RAILS_ENV=#{rails_env} bundle exec rake assets:precompile --trace
   CMD
   #run "cd #{current_release}; RAILS_ENV=#{rails_env} bundle exec rake minify:erb"
 end
