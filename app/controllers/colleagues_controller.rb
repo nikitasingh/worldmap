@@ -104,7 +104,8 @@ def search
   p "#{user.location}"
   p "#{@location}"
 p "********************************************"
- render =>'You Searched with name "#{user.name}". This person is based from "#{user.location}"'
+render :inline => " 'You Searched with name ' "+ name + "'.This person is based from'+ location", 
+                   :locals => { :name => "#{user.name}",:location =>"#{user.location}" }
 end
  
 end
