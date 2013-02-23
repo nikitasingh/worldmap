@@ -1,4 +1,4 @@
-<% user=Colleagues.where(:location=>  params[:loc]).select(:name).sample(5) %>
+<% user=Colleague.where(:location=>  params[:loc]).select(:name).sample(5) %>
 
   <% user.each do |username|  %>
  <%= username.name %>

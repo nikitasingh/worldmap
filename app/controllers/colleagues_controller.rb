@@ -99,13 +99,9 @@ def search
   
   @users=Colleague.where(:name=>name)#.select(:location)
   @users.each do |user| 
-@location=user.location
-  p "********************************************"
-  p "#{user.location}"
-  p "#{@location}"
-p "********************************************"
-render :inline => " 'You Searched with name ' "+ name + "'.This person is based from'+ location", 
-                   :locals => { :name => "#{user.name}",:location =>"#{user.location}" }
+    @name=user.name
+  @location=user.location
+  render :inline => "'The Person you searched in based on '"+@location
 end
  
 end
