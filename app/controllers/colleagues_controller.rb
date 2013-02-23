@@ -3,7 +3,6 @@ class ColleaguesController < ApplicationController
   # GET /colleagues.json
   def index
     @colleagues = Colleague.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @colleagues }
@@ -101,15 +100,40 @@ def search
   @users.each do |user| 
     @name=user.name
   @location=user.location
-  render :inline => "'The Person you searched in based on '"+@location
+  render :inline => @location
 end
  
 end
 
+def searchinloc
+  name=params[:search]
+  loc=params[:loc]
+  @users=Colleague.where(:name=>name,:location=>loc)
+   @users.each do |user| 
+    @name=user.name
+  @location=user.location
+  render :inline=>"" 
+end
+end
 
+def allpins
+ @collegues=Colleague.select("DISTINCT location,project")
+ @location="["
+@place='"place":'
+@project='"project":'
+@start="{"
+@end="}"
+  @collegues.each do |colleague|
 
-
-
+    @location= @location+ @start+ @place + '"'+colleague.location+'",'+
+    @project+'"'+colleague.project+'"'+@end+","
+end
+@location = @location[0..@location.length-2]
+@location = @location +"]"
+p "^^^^^^^^^^^^^^^^"
+p @location
+render :inline =>@location
+end
 
 
 end

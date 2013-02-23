@@ -9,7 +9,21 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6
 <script>
 var infowindow = null;
     $(document).ready(function () { 
-        initializePage();  
+         $.ajax({
+    url: '/colleagues/allpins',
+    error: function (XMLHttpRequest, textStatus, errorThrown) {
+      alert("Something went wrong!! Please try again later.");
+                
+    },
+    success: function(data){
+
+        initializePage(data); 
+       
+        alert(data); 
+    },
+    type: "get"
+  });  
+       
     });
  var address ;
   
@@ -26,15 +40,18 @@ var infowindow = null;
                 
     },
     success: function(data){
-        jQuery("#search_user").html(data);
-        $('#location').val(data);
+         $('#location').val(data);
         address=$('#location').val();
-        initializeSearch();
+        jQuery("#search_user").html("This Person is based in " +address);
+       
+        alert(address);
+        alert(data);
+        initializeSearch(name);
     },
     type: "get"
   });  
  }
-    function initializePage() {
+    function initializePage(data) {
 
         var centerMap = new google.maps.LatLng(0,0);
 
@@ -45,14 +62,21 @@ var infowindow = null;
         }
 
         var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
+        var sites = createAllSites(data);
         setMarkers(map, sites);
         /*infowindow = new google.maps.InfoWindow({
                 content: "loading..."
             });*/
       } 
 
-       function initializeSearch() {
+      function createAllSites(data){
+        var jsonObj = $.parseJSON(data);
+        $.each(jsonObj,function(index,value){
+            alert(value);
+        })
+      }
+
+       function initializeSearch(name) {
 
         var centerMap = new google.maps.LatLng(0,0);
 
@@ -68,12 +92,12 @@ var infowindow = null;
         bikeLayer.setMap(map);
 
           geocoder = new google.maps.Geocoder();
-    geocoder.geocode( { 'address': address}, function(results, status) {
+      geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
         map.setCenter(results[0].geometry.location);
-       var sites = createSites(results[0].geometry,address);
-        setMarkers(map, sites);
+       var sites = createSites(results[0].geometry,address,name);
+        setSearchMarkers(map, sites);
         /*infowindow = new google.maps.InfoWindow({
                 content: "loading..."
             });*/
@@ -81,10 +105,10 @@ var infowindow = null;
       } );
   }
 
-      function createSites(geometry,address){
+      function createSites(geometry,address,name){
 
          var sites = [
-                [address, geometry.location.hb, geometry.location.ib, 2,"Update Later"]
+                [address, geometry.location.hb, geometry.location.ib, 2,"<div style='background-color:#F3E2A9;text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""]
                 ];
 
                 return sites;
@@ -137,17 +161,55 @@ var countnewyork= '<%= Colleague.where(:location=> "new york").count -%>'
                
                 map.setCenter(this.getPosition());
             });
+            
         }
     }
+    function setSearchMarkers(map, sites) {
+
+        for (var i = 0; i < sites.length; i++) {
+            var site = sites[i];
+            var siteLatLng = new google.maps.LatLng(site[1], site[2]);
+            var marker = new google.maps.Marker({
+                position: siteLatLng,
+
+                map: map,
+
+                title: site[0],
+                zIndex: site[3],
+                html: site[4]
+            });
+
+            google.maps.event.addListener(marker, "click", function () {
+               
+               infowindow = new google.maps.InfoWindow({
+                    content: "loading..."
+                });
+                infowindow.setContent(this.html);
+                infowindow.open(map, this);
+               
+                map.setCenter(this.getPosition());
+            });
+             infowindow = new google.maps.InfoWindow({
+                    content: site[4]
+                });
+             infowindow.open(map, marker);
+       } 
+    }
+
 </script>
 </head>
 
 <body>
-    <div id="map_canvas" style="width: 1000px; height: 500px;"></div>
-<div id="search_user"></div>
+    <div class="complete page">
+    <div id="search_user" class="ajaxresult">
+
+    </div>
+<div class="searchbutton">
 <input type="text" id="name">
 <input type="button" value="search" onclick="center()">
-
+</div>
+    <div id="map_canvas" class="map"></div>
+</div>
 
 
  
