@@ -9,7 +9,7 @@ gem 'rails', '3.2.11'
 gem 'mysql2'
 gem 'distribute' ,'0.4.1' 
 gem 'capistrano' 
-
+gem 'sqlite3'
 
 # Gems used only for assets and not required
 # in production environments by default.
