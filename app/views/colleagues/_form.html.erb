@@ -1,29 +1,49 @@
-<%= form_for(@colleague) do |f| %>
-  <% if @colleague.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@colleague.errors.count, "error") %> prohibited this colleague from being saved:</h2>
+<%= form_for(@colleague, :html => {:multipart => true}) do |f| %>
+<% if @colleague.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@colleague.errors.count, "error") %> prohibited this colleague from being saved:</h2>
 
-      <ul>
-      <% @colleague.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% @colleague.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+
+
+
+
+<div style="height: 50px">
+</div>
+<div class="well span4">
+  <div class="field"><font size="3px">Name :</font><br>
+    <%= f.text_field :name , :required => true %>
   </div>
-  <div class="field">
-    <%= f.label :location %><br />
-    <%= f.text_field :location %>
+
+  <div class="field" > <font size="3px">Location : </font><br>
+    <%= f.text_field :location, :required => true  %>
   </div>
-  <div class="field">
-    <%= f.label :project %><br />
-    <%= f.text_field :project %>
+
+  <div class="field" id="Date"> <font size="3px">Project : </font><br>
+    <%= f.text_field :project , :required => true %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+
+  <div class="field"> <font size="3px">Attach Picture : </font><br>
+    <%= f.file_field :attachment %>
   </div>
+
+
+
+  <div style="height: 50px">
+  </div>
+
+  <div>  <%= f.submit "Save", :class=> 'btn btn-primary' %></div>
+
+  <div>  <%= link_to 'Back', colleagues_path, :class=> 'btn' %></div>
+
+</div>
+
 <% end %>

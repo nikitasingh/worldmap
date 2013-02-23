@@ -1,0 +1,25 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner" style="height:60px">
+    <div class="container-fluid">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+
+       
+      </a>
+      <div class="brand" style="margin-top: 5px;"><h1><font color= "white">
+        <%#= link_to(image_tag("icon", :border => 0), colleagues_path) %>
+        <%= link_to 'World Map', colleagues_path %></font></h1></div>
+      <div class="pull-right"  style="margin-top: 5px;">
+          <div class="pull-right">
+            <b><font color= "white" size="2px">
+                Today is <%=Time.new.strftime('%a %d %b %Y')%>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </b></font>
+                </div>
+                <div >
+            <%= link_to 'Manage Colleagues', colleagues_path %>
+         </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>

@@ -11,6 +11,10 @@ gem 'distribute' ,'0.4.1'
 gem 'capistrano' 
 gem 'sqlite3'
 
+
+gem 'paperclip'
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

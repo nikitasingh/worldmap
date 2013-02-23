@@ -5,8 +5,24 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
+
+
+<style>
+      ul.nav li.dropdown:hover ul.dropdown-menu{
+        display: block;
+      }
+      body{
+        padding: 40px 0 40px 0;
+
+      }
+ </style>
+
 </head>
 <body>
+	<%= render 'shared/header' %>
+	</br>
+    </br>
 
 <%= yield %>
 

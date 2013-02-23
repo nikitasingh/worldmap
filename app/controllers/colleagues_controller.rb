@@ -4,10 +4,10 @@ class ColleaguesController < ApplicationController
   def index
     @colleagues = Colleague.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @colleagues }
-    end
+    # respond_to do |format|
+    #   format.html # index.html.erb
+    #   format.json { render json: @colleagues }
+    # end
   end
 
   # GET /colleagues/1
