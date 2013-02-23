@@ -11,14 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130222074405) do
+ActiveRecord::Schema.define(:version => 20130223111338) do
 
   create_table "colleagues", :force => true do |t|
     t.string   "name"
     t.string   "location"
     t.string   "project"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.string   "longitude"
+    t.string   "latitude"
   end
 
 end

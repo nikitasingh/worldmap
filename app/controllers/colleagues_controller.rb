@@ -7,6 +7,7 @@ class ColleaguesController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @colleagues }
     end
+
   end
 
   # GET /colleagues/1

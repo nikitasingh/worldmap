@@ -1,20 +1,45 @@
 <p id="notice"><%= notice %></p>
+ <div style=" min-height: 50px">
+  </div>
+<h2>Colleague Details </h2><br/>
 
-<p>
-  <b>Name:</b>
-  <%= @colleague.name %>
-</p>
+ <div style=" min-height: 20px">
+  </div>
+<div style="min-width: 960px; overflow:auto;">
+    <table  id="show_table" >
+      <thead>
+      	 <tr> 
+      	 	<%  if @colleague.attachment.blank? %>
+            <td style=" padding-right: 5px; padding-left: 5px">Not Available</td>
+        <% else %>
+            <td style=" padding-right: 5px; padding-left: 5px" align="center"><%= image_tag @colleague.attachment.url(:medium) %></td>
+        <% end %>
+      </tr>
 
-<p>
-  <b>Location:</b>
-  <%= @colleague.location %>
-</p>
+     <tr>
+       
+          <td style=" padding-right: 5px; padding-left: 5px; padding-bottom: 5px; min-width: 50px"><font size="3"><b>Name </b></font></td> 
+          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px"><%= @colleague.name %></td>
+      </tr>
+      <tr>
+        <td style=" padding-right: 5px; padding-left: 5px;padding-bottom: 5px; min-width: 150px "><font size="3"><b>Location </b></font></td>  
+        <td style=" padding-right: 5px; padding-left: 5px; min-width: 150px "><%= @colleague.location %></td>
+      </tr>
+      <tr>
+        <td style=" padding-right: 5px; padding-left: 5px; padding-bottom: 5px;min-width: 100px "><font size="3"><b>Date </b></font></td>     
+        <td style=" padding-right: 5px; padding-left: 5px; min-width: 150px "><%= @colleague.project %></td>
+      </tr>
+     
+ 
+      </thead>
 
-<p>
-  <b>Project:</b>
-  <%= @colleague.project %>
-</p>
+    </table>
+  </div>
 
+ <div style=" min-height: 50px">
+  </div>
 
-<%= link_to 'Edit', edit_colleague_path(@colleague) %> |
-<%= link_to 'Back', colleagues_path %>
+ 
+  <%= link_to 'Back', colleagues_path, :class=> 'btn' %>
+
+  <%= link_to 'Edit', edit_colleague_path(@colleague), :class=> 'btn' %>
