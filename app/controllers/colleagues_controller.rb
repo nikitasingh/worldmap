@@ -42,21 +42,37 @@ class ColleaguesController < ApplicationController
 
   def create
     @colleague = Colleague.new(params[:colleague])
-lonlat=params[:longlat]
+    p @colleague.location
+    res = Geokit::Geocoders::GoogleGeocoder.geocode(@colleague.location).ll
 
-p "***********"
-p params.inspect
-p"***********"
+    latlong= res.split(",")
+
+    p "********************##############**********}"
+    p latlong.blank?
+    p latlong
+
+    p "********************##############**********}"
+
+
+
+
+
+    @colleague.latitude=latlong[1]
+    @colleague.longitude=latlong[0]
 
     respond_to do |format|
-      if @colleague.save
+      if !(latlong.blank?)
+      if @colleague.save 
         format.html { redirect_to @colleague, notice: 'Colleague was successfully created.' }
         format.json { render json: @colleague, status: :created, location: @colleague }
       else
         format.html { render action: "new" }
         format.json { render json: @colleague.errors, status: :unprocessable_entity }
       end
+    else
+      format.html { redirect_to new_colleague_path, notice: 'Invalid Location ..!!' }
     end
+  end
   end
 
   # PUT /colleagues/1
@@ -90,56 +106,56 @@ p"***********"
 
   def map
     @countmum=Colleague.where(:location=> "mumbai").count
-  
+
 
   end
 
   def list
-    
-  
+
+
 
   end
 
-def search
-  name=params[:search]
-  
+  def search
+    name=params[:search]
+
   @users=Colleague.where(:name=>name)#.select(:location)
   @users.each do |user| 
     @name=user.name
-  @location=user.location
-  render :inline => @location
-end
- 
+    @location=user.location
+    render :inline => @location
+  end
+
 end
 
 def searchinloc
   name=params[:search]
   loc=params[:loc]
   @users=Colleague.where(:name=>name,:location=>loc)
-   @users.each do |user| 
+  @users.each do |user| 
     @name=user.name
-  @location=user.location
-  render :inline=>"" 
-end
+    @location=user.location
+    render :inline=>"" 
+  end
 end
 
 def allpins
  @collegues=Colleague.select("DISTINCT location,longitude,latitude")
  @location="["
-@place='"place":'
-@longitude='"longitude":'
-@latitude='"latitude":'
-@countno='"count":'
-@start="{"
-@end="}"
-  @collegues.each do |colleague|
-    @count=  Colleague.where(:location=> colleague.location).count 
-    @location= @location+ @start+ 
-    @place + '"'+colleague.location+'",'+
-    @longitude+'"'+colleague.longitude+'",' +
-    @latitude+'"'+colleague.latitude+'",'+
-     @countno+'"'+ @count.to_s+'"'+
-    @end+","
+ @place='"place":'
+ @longitude='"longitude":'
+ @latitude='"latitude":'
+ @countno='"count":'
+ @start="{"
+ @end="}"
+ @collegues.each do |colleague|
+  @count=  Colleague.where(:location=> colleague.location).count 
+  @location= @location+ @start+ 
+  @place + '"'+colleague.location+'",'+
+  @longitude+'"'+colleague.longitude+'",' +
+  @latitude+'"'+colleague.latitude+'",'+
+  @countno+'"'+ @count.to_s+'"'+
+  @end+","
 
 
 end

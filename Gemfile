@@ -10,6 +10,7 @@ gem 'mysql2'
 gem 'distribute' ,'0.4.1' 
 gem 'capistrano' 
 gem 'sqlite3'
+gem 'geokit-rails3'
 
 
 gem 'paperclip'

@@ -2,126 +2,129 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script
-src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false">
-</script>
-<input type="hidden" value="" id="location"/> 
-<script>
-var infowindow = null;
-    $(document).ready(function () { 
-         $.ajax({
+  <script
+  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false">
+  </script>
+  <input type="hidden" value="" id="location"/> 
+  <script>
+  var infowindow = null;
+
+  function initialize() { 
+   $.ajax({
     url: '/colleagues/allpins',
     error: function (XMLHttpRequest, textStatus, errorThrown) {
       alert("Something went wrong!! Please try again later.");
-                
+
     },
     success: function(data){
 
-        initializePage(data); 
-       
+      initializePage(data); 
+
     },
     type: "get"
   });  
-       
-    });
- var address ;
-  
-   
- function center()
- {
-   
-  name=document.getElementById("name").value;
-    
-     $.ajax({
-    url: '/colleagues/search?search='+name,
-    error: function (XMLHttpRequest, textStatus, errorThrown) {
-      alert("Something went wrong!! Please try again later.");
-                
-    },
-    success: function(data){
-         $('#location').val(data);
-        address=$('#location').val();
-        jQuery("#search_user").html("This Person is based in " +address);
-       
-        alert(address);
-        alert(data);
-        initializeSearch(name);
-    },
-    type: "get"
-  });  
+
  }
-    function initializePage(data) {
 
-        var centerMap = new google.maps.LatLng(0,0);
+  $(document).ready(initialize);
+  var address ;
+  
 
-        var myOptions = {
-            zoom: 2,
-            center: centerMap,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
+  function center()
+  {
 
-        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-        var sites = createAllSites(data);
-        setMarkers(map, sites);
+    name=document.getElementById("name").value;
+    
+    $.ajax({
+      url: '/colleagues/search?search='+name,
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        alert("Something went wrong!! Please try again later.");
+
+      },
+      success: function(data){
+       $('#location').val(data);
+       address=$('#location').val();
+       jQuery("#search_user").html("This Person is based in " +address);
+       
+       alert(address);
+       alert(data);
+       initializeSearch(name);
+     },
+     type: "get"
+   });  
+  }
+  function initializePage(data) {
+
+    var centerMap = new google.maps.LatLng(0,0);
+
+    var myOptions = {
+      zoom: 2,
+      center: centerMap,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    var sites = createAllSites(data);
+    setMarkers(map, sites);
         /*infowindow = new google.maps.InfoWindow({
                 content: "loading..."
-            });*/
-      } 
+              });*/
+} 
 
-      function createAllSites(data){
-        var sites=[];
-        var jsonObj = $.parseJSON(data);
-        $.each(jsonObj,function(index,value){
-            var site=[];
-            site.push(value.place);
-            site.push(parseFloat(value.longitude));
-            site.push(parseFloat(value.latitude));
-            site.push(2);
-            
+function createAllSites(data){
+  var sites=[];
+  var jsonObj = $.parseJSON(data);
+  $.each(jsonObj,function(index,value){
+    var site=[];
+    site.push(value.place);
+    site.push(parseFloat(value.longitude));
+    site.push(parseFloat(value.latitude));
+    site.push(2);
 
-            site.push("<div style='background-color:#F3E2A9;text-align:center'><b> Number of employees in "+ value.place+"="+value.count+"<br/>"+value.place+"<br/><a href='/colleagues/list?loc=mumbai'>View full List</a></div>");
-            sites.push(site);
-        });
-        return sites;
-      }
 
-       function initializeSearch(name) {
+    site.push("<div style='background-color:#F3E2A9;text-align:center'><b> Number of employees in "+ value.place+"="+value.count+"<br/>"+value.place+"<br/><a href='/colleagues/list?loc="+ value.place+"'>View full List</a></div>");
+    sites.push(site);
+  });
+  return sites;
+}
 
-        var centerMap = new google.maps.LatLng(0,0);
+function initializeSearch(name) {
 
-        var myOptions = {
-            zoom: 2,
-            center: centerMap,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
+  var centerMap = new google.maps.LatLng(0,0);
 
-        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+  var myOptions = {
+    zoom: 2,
+    center: centerMap,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
 
-        var bikeLayer = new google.maps.BicyclingLayer();
-        bikeLayer.setMap(map);
+  var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-          geocoder = new google.maps.Geocoder();
-      geocoder.geocode( { 'address': address}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
+  var bikeLayer = new google.maps.BicyclingLayer();
+  bikeLayer.setMap(map);
+
+  geocoder = new google.maps.Geocoder();
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
         //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
         map.setCenter(results[0].geometry.location);
-       var sites = createSites(results[0].geometry,address,name);
+        var sites = createSites(results[0].geometry,address,name);
         setSearchMarkers(map, sites);
         /*infowindow = new google.maps.InfoWindow({
                 content: "loading..."
-            });*/
-      }
-      } );
-  }
+              });*/
+}
+} );
+}
 
-      function createSites(geometry,address,name){
+function createSites(geometry,address,name){
 
-         var sites = [
-                [address, geometry.location.hb, geometry.location.ib, 2,"<div style='background-color:#F3E2A9;text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""]
-                ];
+ var sites = [
+ [address, geometry.location.hb, geometry.location.ib, 2,"<div style='background-color:#F3E2A9;text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""]
+ ];
 
-                return sites;
-      }
+ return sites;
+}
 
 var addressField = document.getElementById('search_address');
 var geocoder = new google.maps.Geocoder();
@@ -129,93 +132,103 @@ var geocoder = new google.maps.Geocoder();
 var countmumbai= '<%= @countmum-%>'
 var namemumbai='<%= user=Colleague.where(:location=> "mumbai").select(:name).sample(5) 
 list=[]
-  user.each do |username| 
- list<<username.name
-  
- end -%>'
- var namemumbai='<%= list[0] -%>'
+user.each do |username| 
+list<<username.name
+
+end -%>'
+var namemumbai='<%= list[0] -%>'
 
 
 
 
 
-    function setMarkers(map, sites) {
+function setMarkers(map, sites) {
 
-        for (var i = 0; i < sites.length; i++) {
-            var site = sites[i];
-            var siteLatLng = new google.maps.LatLng(site[1], site[2]);
-            var marker = new google.maps.Marker({
-                position: siteLatLng,
+  for (var i = 0; i < sites.length; i++) {
+    var site = sites[i];
+    var siteLatLng = new google.maps.LatLng(site[1], site[2]);
+    var marker = new google.maps.Marker({
+      position: siteLatLng,
 
-                map: map,
+      map: map,
 
-                title: site[0],
-                zIndex: site[3],
-                html: site[4]
-            });
+      title: site[0],
+      zIndex: site[3],
+      html: site[4]
+    });
 
-            google.maps.event.addListener(marker, "click", function () {
-               
-               infowindow = new google.maps.InfoWindow({
-                    content: "loading..."
-                });
-                infowindow.setContent(this.html);
-                infowindow.open(map, this);
-               
-                map.setCenter(this.getPosition());
-            });
-            
-        }
-    }
-    function setSearchMarkers(map, sites) {
+    google.maps.event.addListener(marker, "click", function () {
 
-        for (var i = 0; i < sites.length; i++) {
-            var site = sites[i];
-            var siteLatLng = new google.maps.LatLng(site[1], site[2]);
-            var marker = new google.maps.Marker({
-                position: siteLatLng,
+     infowindow = new google.maps.InfoWindow({
+      content: "loading..."
+    });
+     infowindow.setContent(this.html);
+     infowindow.open(map, this);
 
-                map: map,
+     map.setCenter(this.getPosition());
+   });
 
-                title: site[0],
-                zIndex: site[3],
-                html: site[4]
-            });
+  }
+}
+function setSearchMarkers(map, sites) {
 
-            google.maps.event.addListener(marker, "click", function () {
-               
-               infowindow = new google.maps.InfoWindow({
-                    content: "loading..."
-                });
-                infowindow.setContent(this.html);
-                infowindow.open(map, this);
-               
-                map.setCenter(this.getPosition());
-            });
-             infowindow = new google.maps.InfoWindow({
-                    content: site[4]
-                });
-             infowindow.open(map, marker);
-       } 
-    }
+  for (var i = 0; i < sites.length; i++) {
+    var site = sites[i];
+    var siteLatLng = new google.maps.LatLng(site[1], site[2]);
+    var marker = new google.maps.Marker({
+      position: siteLatLng,
+
+      map: map,
+
+      title: site[0],
+      zIndex: site[3],
+      html: site[4]
+    });
+
+    google.maps.event.addListener(marker, "click", function () {
+
+     infowindow = new google.maps.InfoWindow({
+      content: "loading..."
+    });
+     infowindow.setContent(this.html);
+     infowindow.open(map, this);
+
+     map.setCenter(this.getPosition());
+   });
+
+
+
+
+    infowindow = new google.maps.InfoWindow({
+      content: site[4]
+    });
+    infowindow.open(map, marker);
+  } 
+    google.maps.event.addListener(infowindow, 'closeclick', function() {  
+    alert("I'm Closed");
+    initialize(); 
+})
+
+
+}
 
 </script>
 </head>
 
 <body>
-    <div class="complete page">
+  <div class="complete page">
     <div id="search_user" class="ajaxresult">
 
     </div>
-<div class="searchbutton">
-<input type="text" id="name">
-<input type="button" value="search" onclick="center()">
-</div>
+    <div class="searchbutton">
+      <input type="text" id="name">
+      <input type="button" value="search" onclick="center()">
+    </div>
     <div id="map_canvas" class="map"></div>
-</div>
+  </div>
 
 
- 
+
 </body>
 </html>
 
