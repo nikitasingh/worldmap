@@ -39,8 +39,14 @@ class ColleaguesController < ApplicationController
 
   # POST /colleagues
   # POST /colleagues.json
+
   def create
     @colleague = Colleague.new(params[:colleague])
+lonlat=params[:longlat]
+
+p "***********"
+p params.inspect
+p"***********"
 
     respond_to do |format|
       if @colleague.save
@@ -118,21 +124,30 @@ end
 end
 
 def allpins
- @collegues=Colleague.select("DISTINCT location,project")
+ @collegues=Colleague.select("DISTINCT location,longitude,latitude")
  @location="["
 @place='"place":'
-@project='"project":'
+@longitude='"longitude":'
+@latitude='"latitude":'
+@countno='"count":'
 @start="{"
 @end="}"
   @collegues.each do |colleague|
+    @count=  Colleague.where(:location=> colleague.location).count 
+    @location= @location+ @start+ 
+    @place + '"'+colleague.location+'",'+
+    @longitude+'"'+colleague.longitude+'",' +
+    @latitude+'"'+colleague.latitude+'",'+
+     @countno+'"'+ @count.to_s+'"'+
+    @end+","
 
-    @location= @location+ @start+ @place + '"'+colleague.location+'",'+
-    @project+'"'+colleague.project+'"'+@end+","
+
 end
 @location = @location[0..@location.length-2]
 @location = @location +"]"
 p "^^^^^^^^^^^^^^^^"
 p @location
+
 render :inline =>@location
 end
 

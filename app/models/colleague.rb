@@ -1,9 +1,9 @@
 class Colleague < ActiveRecord::Base
-  attr_accessible :location, :name, :project
+  attr_accessible :location, :name, :project, :latitude, :longitude, :longlat
 
   attr_accessible :attachment
 
-  attr_accessor :attachment
+  attr_accessor :attachment,:longlat
 
 has_attached_file :attachment, :styles => {
     :thumb=> "100x100#",

@@ -19,7 +19,6 @@ var infowindow = null;
 
         initializePage(data); 
        
-        alert(data); 
     },
     type: "get"
   });  
@@ -70,10 +69,20 @@ var infowindow = null;
       } 
 
       function createAllSites(data){
+        var sites=[];
         var jsonObj = $.parseJSON(data);
         $.each(jsonObj,function(index,value){
-            alert(value);
-        })
+            var site=[];
+            site.push(value.place);
+            site.push(parseFloat(value.longitude));
+            site.push(parseFloat(value.latitude));
+            site.push(2);
+            
+
+            site.push("<div style='background-color:#F3E2A9;text-align:center'><b> Number of employees in "+ value.place+"="+value.count+"<br/>"+value.place+"<br/><a href='/colleagues/list?loc=mumbai'>View full List</a></div>");
+            sites.push(site);
+        });
+        return sites;
       }
 
        function initializeSearch(name) {
@@ -126,13 +135,7 @@ list=[]
  end -%>'
  var namemumbai='<%= list[0] -%>'
 
-var countgurgaon= '<%= Colleague.where(:location=> "gurgaon").count -%>'
-var countnewyork= '<%= Colleague.where(:location=> "new york").count -%>'
-    var sites = [
-    ['Mumbai', 19.0759837, 72.8776559, 4,"<div style='background-color:#F3E2A9;text-align:center'><b> Number of employees in Mumbai="+countmumbai+"<br/>"+namemumbai+"<br/><a href='/colleagues/list?loc=mumbai'>View full List</a></div>"],
-    ['Gurgaon', 28.4594965, 77.0266383, 2,"<div style='background-color:#F3E2A9;text-align:center'><b> Number of employees in gurgaon="+countgurgaon+"<br/><a href='/colleagues/list?loc=gurgaon'>View full List</a>"],
-      ['New York',40.7143528, -74.0059731, 2,"<div style='background-color:#F3E2A9;text-align:center'><b> Number of employees in newyork="+countnewyork+"<br/><a href='/colleagues/list?loc=new york'>View full List</a>"]
-];
+
 
 
 
