@@ -14,7 +14,7 @@ gem 'geokit-rails3'
 
 
 gem 'paperclip'
-gem 'libv8', '~> 3.11.8'
+#gem 'libv8', '~> 3.11.8'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -23,8 +23,8 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer'
-  gem 'execjs'
+  #gem 'therubyracer'
+  #gem 'execjs'
   gem 'uglifier', '>= 1.0.3'
 end
 
