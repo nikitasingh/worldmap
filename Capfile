@@ -2,7 +2,7 @@ require 'bundler/capistrano'
 require 'active_support/core_ext' #for blank?
 
 
-set :application, 'WorldMap'
+set :application, 'worldmap'
 set :app_type, 'rack'
 set :repository, 'git://githuben.intranet.mckinsey.com/ODC-Applications/WorldMap.git'
 set :scm, 'git'

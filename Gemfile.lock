@@ -151,7 +151,7 @@ PLATFORMS
 DEPENDENCIES
   capistrano
   coffee-rails (~> 3.2.1)
-  distribute (= 0.4.0)
+  distribute
   geokit-rails3
   jquery-rails
   mysql2
