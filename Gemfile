@@ -14,7 +14,7 @@ gem 'geokit-rails3'
 
 
 gem 'paperclip'
-
+gem 'libv8', '~> 3.11.8'
 
 # Gems used only for assets and not required
 # in production environments by default.
