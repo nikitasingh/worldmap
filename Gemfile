@@ -11,7 +11,6 @@ gem 'distribute' ,'0.4.1'
 gem 'capistrano' 
 gem 'sqlite3'
 gem 'geokit-rails3'
-gem 'crypto'
 
 
 gem 'paperclip'
@@ -22,7 +21,7 @@ gem 'paperclip'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'execjs'
+
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer'
 
