@@ -49,7 +49,7 @@ GEM
       execjs
     coffee-script-source (1.5.0)
     crypto (0.0.4)
-    distribute (0.4.0)
+    distribute (0.4.1)
       activerecord
       activesupport
       capistrano
@@ -151,7 +151,7 @@ PLATFORMS
 DEPENDENCIES
   capistrano
   coffee-rails (~> 3.2.1)
-  distribute
+  distribute (= 0.4.1)
   geokit-rails3
   jquery-rails
   mysql2
