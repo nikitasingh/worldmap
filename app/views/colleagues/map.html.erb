@@ -45,9 +45,7 @@
        $('#location').val(data);
        address=$('#location').val();
        jQuery("#search_user").html("This Person is based in " +address);
-       
-       alert(address);
-       alert(data);
+  
        initializeSearch(name);
      },
      type: "get"
@@ -82,7 +80,7 @@ function createAllSites(data){
     site.push(2);
 
 
-    site.push("<div style='background-color:#F3E2A9;text-align:center'><b> Number of employees in "+ value.place+"="+value.count+"<br/>"+value.place+"<br/><a href='/colleagues/list?loc="+ value.place+"'>View full List</a></div>");
+    site.push("<div style='text-align:center'><b> Number of employees in "+ value.place+"="+value.count+"<br/>"+value.place+"<br/><a href='/colleagues/list?loc="+ value.place+"' target='_blank'>View full List</a></div>");
     sites.push(site);
   });
   return sites;
@@ -120,7 +118,7 @@ function initializeSearch(name) {
 function createSites(geometry,address,name){
 
  var sites = [
- [address, geometry.location.hb, geometry.location.ib, 2,"<div style='background-color:#F3E2A9;text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""]
+ [address, geometry.location.hb, geometry.location.ib, 2,"<div style='text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""]
  ];
 
  return sites;
@@ -205,7 +203,7 @@ function setSearchMarkers(map, sites) {
     infowindow.open(map, marker);
   } 
     google.maps.event.addListener(infowindow, 'closeclick', function() {  
-    alert("I'm Closed");
+
     initialize(); 
 })
 
@@ -217,13 +215,14 @@ function setSearchMarkers(map, sites) {
 
 <body>
   <div class="complete page">
-    <div id="search_user" class="ajaxresult">
+    
 
-    </div>
     <div class="searchbutton">
+      Enter Colleague Name
       <input type="text" id="name">
       <input type="button" value="search" onclick="center()">
     </div>
+
     <div id="map_canvas" class="map"></div>
   </div>
 
