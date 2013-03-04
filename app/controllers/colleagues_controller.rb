@@ -140,6 +140,8 @@ def searchinloc
 end
 
 def allpins
+
+  p "inside allpinssss"
  @collegues=Colleague.select("DISTINCT location,longitude,latitude")
  @location="["
  @place='"place":'
