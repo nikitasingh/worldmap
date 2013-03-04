@@ -105,7 +105,7 @@ class ColleaguesController < ApplicationController
 
 
   def map
-    @countmum=Colleague.where(:location=> "mumbai").count
+    
 
 
   end
