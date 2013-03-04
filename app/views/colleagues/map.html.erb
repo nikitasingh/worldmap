@@ -127,15 +127,6 @@ function createSites(geometry,address,namel){
 var addressField = document.getElementById('search_address');
 var geocoder = new google.maps.Geocoder();
 
-var countmumbai= '<%= @countmum-%>'
-var namemumbai='<%= user=Colleague.where(:location=> "mumbai").select(:name).sample(5) 
-list=[]
-user.each do |username| 
-list<<username.name
-
-end -%>'
-var namemumbai='<%= list[0] -%>'
-
 
 
 
