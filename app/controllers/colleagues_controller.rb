@@ -106,7 +106,7 @@ class ColleaguesController < ApplicationController
 
   def map
     
-
+  p "inside maps"
 
   end
 
