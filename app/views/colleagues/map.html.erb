@@ -59,7 +59,7 @@
        
        jQuery("#search_user").html("This Person is based in " +address);
   
-       initializeSearch(name);
+       initializeSearch(name,address);
      },
      type: "get"
    });  
@@ -101,8 +101,9 @@ function createAllSites(data){
   return sites;
 }
 
-function initializeSearch(name) {
+function initializeSearch(name,address) {
 alert(name);
+alert(address);
   var centerMap = new google.maps.LatLng(0,0);
 
   var myOptions = {
