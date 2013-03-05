@@ -42,17 +42,10 @@
 
       },
       success: function(data){
-        var jsonObj = $.parseJSON(data);
+        
         alert(data);
-        $.each(jsonObj,function(index,value){
-    var address,image;
-   address=value.place;
-    image=value.image;
-  alert(address);
-  alert(image);
-
-  });
-   
+       $('#location').val(data);
+       address=$('#location').val();
        jQuery("#search_user").html("This Person is based in " +address);
   
        initializeSearch(name);
