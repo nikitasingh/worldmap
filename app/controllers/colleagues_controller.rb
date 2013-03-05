@@ -132,7 +132,7 @@ class ColleaguesController < ApplicationController
 
   @location= @location+ @start+ 
   @place + '"'+colleague.location+'",'+
-  @image+'"worldmap'+colleague.attachment.url(:medium)+'"' +
+  @image+'"..'+colleague.attachment.url(:medium)+'"' +
  
   @end+","
 
