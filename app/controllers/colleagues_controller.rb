@@ -122,10 +122,10 @@ class ColleaguesController < ApplicationController
   @users=Colleague.where(:name=>name)#.select(:location)
   @users.each do |user| 
     @name=user.name
-    @data[1]=user.location
-    @data[2]=user.attachment
+    @data[0]=user.location
+    @data[1]=user.attachment
 
-    render :inline => @data[]
+    render :inline => @data
   end
 
 end
