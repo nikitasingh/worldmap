@@ -125,7 +125,7 @@ class ColleaguesController < ApplicationController
     @data[1]=user.location
     @data[2]=user.attachment
 
-    render :inline => @data
+    render :inline => @data[]
   end
 
 end
