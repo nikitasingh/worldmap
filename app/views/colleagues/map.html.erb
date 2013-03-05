@@ -122,8 +122,8 @@ alert("inside create sites for search");
 alert(address);
 alert(geometry);
 alert(geometry.location);
-alert(geometry.location.hb);
-alert(geometry.location.ib);
+alert(geometry.location.lat());
+alert(geometry.location.lng());
  var sites = [
  [address, geometry.location.hb, geometry.location.ib, 2,"<div style='text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""]
  ];
