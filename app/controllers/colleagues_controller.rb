@@ -119,12 +119,34 @@ class ColleaguesController < ApplicationController
   def search
     name=params[:search]
 
-  @users=Colleague.where(:name=>name)#.select(:location)
-  @users.each do |user| 
-    @name=user.name
-    @location=user.location
-    render :inline => @location
-  end
+  
+
+  p "inside allpinssss"
+ @collegues= @users=Colleague.where(:name=>name)
+ @location="["
+ @place='"place":'
+ @image='"image":'
+ @start="{"
+ @end="}"
+ @collegues.each do |colleague|
+
+  @location= @location+ @start+ 
+  @place + '"'+colleague.location+'",'+
+  @image+'"'+colleague.attachment+'",' +
+ 
+  @end+","
+
+
+end
+@location = @location[0..@location.length-2]
+@location = @location +"]"
+p "^^^^^^^^^^^^^^^^"
+p @location
+
+render :inline =>@location
+end
+
+
 
 end
 
