@@ -117,6 +117,7 @@ alert(name);
   bikeLayer.setMap(map);
 alert("before geocoding");
   geocoder = new google.maps.Geocoder();
+  alert(address);
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
         //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
