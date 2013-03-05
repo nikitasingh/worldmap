@@ -1,15 +1,23 @@
 Worldmap::Application.routes.draw do
   
  
-  match "colleagues/map" => "colleagues#map", :as => :map
-    match "colleagues/search" => "colleagues#search"
-     match "colleagues/list" => "colleagues#list"
-     match "colleagues/searchinloc" => "colleagues#searchinloc"
-     match "/colleagues/allpins" =>"colleagues#allpins"
+
 
      
      
- resources :colleagues
+ resources :colleagues do
+
+    collection do
+      get "map"
+      get "search"
+      get "list"
+      get "searchinloc"
+      get "allpins"
+
+    end
+
+
+ end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
