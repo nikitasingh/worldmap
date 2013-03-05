@@ -46,8 +46,15 @@
         alert(data);
           var jsonObj = $.parseJSON(data);
           alert(jsonObj);
-       $('#location').val(data);
-       address=$('#location').val();
+
+
+            $.each(jsonObj,function(index,value){
+    var address;
+    address=value.place
+    
+
+  });
+       
        jQuery("#search_user").html("This Person is based in " +address);
   
        initializeSearch(name);
