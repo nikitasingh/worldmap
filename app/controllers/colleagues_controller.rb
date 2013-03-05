@@ -123,7 +123,7 @@ class ColleaguesController < ApplicationController
   @users.each do |user| 
     @name=user.name
     @location=user.location
-    render :inline => @location,@name
+    render :inline => @location
   end
 
 end
