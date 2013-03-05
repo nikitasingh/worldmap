@@ -123,8 +123,8 @@ class ColleaguesController < ApplicationController
   @users.each do |user| 
     @name=user.name
     @location=user.location
-    @image=user.attachment
-    render :inline => @location,@image
+    
+    render :inline => @location
   end
 
 end
