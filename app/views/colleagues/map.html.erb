@@ -118,14 +118,10 @@ function initializeSearch(name) {
 }
 
 function createSites(geometry,address,name){
-alert("inside create sites for search");
-alert(address);
-alert(geometry);
-alert(geometry.location);
-alert(geometry.location.lat());
-alert(geometry.location.lng());
+
+
  var sites = [
- [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""]
+ [address, geometry.location.lng(), geometry.location.lat(), 2,"<div style='text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""]
  ];
 
  return sites;
@@ -142,7 +138,7 @@ function setMarkers(map, sites) {
 
   for (var i = 0; i < sites.length; i++) {
     var site = sites[i];
-    alert(sites[i]);
+  
     var siteLatLng = new google.maps.LatLng(site[1], site[2]);
 
     var marker = new google.maps.Marker({
@@ -175,7 +171,7 @@ function setSearchMarkers(map, sites) {
     alert(sites[i]);
     alert(site[1]);
     alert(site[2]);
-    var siteLatLng = new google.maps.LatLng(site[2], site[3]);
+    var siteLatLng = new google.maps.LatLng(site[1], site[2]);
     alert(siteLatLng);
     var marker = new google.maps.Marker({
       position: siteLatLng,
