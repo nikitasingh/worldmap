@@ -169,7 +169,7 @@ function setSearchMarkers(map, sites) {
     var site = sites[i];
     alert(site[1]);
     alert(site[2]);
-    var siteLatLng = new google.maps.LatLng(site[1], site[2]);
+    var siteLatLng = new google.maps.LatLng(site[2], site[3]);
     alert(siteLatLng);
     var marker = new google.maps.Marker({
       position: siteLatLng,
