@@ -102,7 +102,7 @@ function createAllSites(data){
 }
 
 function initializeSearch(name) {
-
+alert(name);
   var centerMap = new google.maps.LatLng(0,0);
 
   var myOptions = {
@@ -131,7 +131,10 @@ function initializeSearch(name) {
 }
 
 function createSites(geometry,address,name){
-
+alert("inside createsites");
+alert(address);
+alert(geometry);
+alert(name);
 
  var sites = [
  [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""]
@@ -178,7 +181,8 @@ function setMarkers(map, sites) {
   }
 }
 function setSearchMarkers(map, sites) {
-
+alert("inside setsearchmarkers");
+alert(sites);
   for (var i = 0; i < sites.length; i++) {
     var site = sites[i];
   
