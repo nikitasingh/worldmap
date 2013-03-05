@@ -43,9 +43,9 @@
       },
       success: function(data){
 
-        alert(data);
+    
           var jsonObj = $.parseJSON(data);
-          alert(jsonObj);
+
 
 
             $.each(jsonObj,function(index,value){
@@ -54,12 +54,12 @@
     image=value.image;
 
   });
-     alert(address);
+    
      alert(image);
        
        jQuery("#search_user").html("This Person is based in " +address);
   
-       initializeSearch(name,address);
+       initializeSearch(name,address,image);
      },
      type: "get"
    });  
@@ -84,9 +84,9 @@
 
 function createAllSites(data){
   var sites=[];
-  alert(data);
+
   var jsonObj = $.parseJSON(data);
-  alert(jsonObj);
+
   $.each(jsonObj,function(index,value){
     var site=[];
     site.push(value.place);
@@ -101,9 +101,9 @@ function createAllSites(data){
   return sites;
 }
 
-function initializeSearch(name,address) {
-alert(name);
-alert(address);
+function initializeSearch(name,address,image) {
+
+
   var centerMap = new google.maps.LatLng(0,0);
 
   var myOptions = {
@@ -116,32 +116,29 @@ alert(address);
 
   var bikeLayer = new google.maps.BicyclingLayer();
   bikeLayer.setMap(map);
-alert("before geocoding");
+
   geocoder = new google.maps.Geocoder();
-  alert(address);
+
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
         //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
-        alert("inside status");
+      
         map.setCenter(results[0].geometry.location);
-        var sites = createSites(results[0].geometry,address,name);
+        var sites = createSites(results[0].geometry,address,name,image);
         setSearchMarkers(map, sites);
         /*infowindow = new google.maps.InfoWindow({
                 content: "loading..."
               });*/
 }
 } );
-  alert("centered last");
+
 }
 
 function createSites(geometry,address,name){
-alert("inside createsites");
-alert(address);
-alert(geometry);
-alert(name);
+
 
  var sites = [
- [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""]
+ [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""+"<img src='"+image+"'>"]
  ];
 
  return sites;
@@ -185,8 +182,8 @@ function setMarkers(map, sites) {
   }
 }
 function setSearchMarkers(map, sites) {
-alert("inside setsearchmarkers");
-alert(sites);
+
+
   for (var i = 0; i < sites.length; i++) {
     var site = sites[i];
   
