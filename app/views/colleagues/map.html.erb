@@ -42,12 +42,19 @@
 
       },
       success: function(data){
+        var jsonObj = $.parseJSON(data);
         alert(data);
-       $('#location').val(data);
-       address=$('#location').val();
+        $.each(jsonObj,function(index,value){
+    var address,image;
+   address=value.place;
+    image=value.image;
+  
+
+  });
+   
        jQuery("#search_user").html("This Person is based in " +address);
   
-       initializeSearch(name);
+       initializeSearch(name,image);
      },
      type: "get"
    });  
@@ -87,7 +94,7 @@ function createAllSites(data){
   return sites;
 }
 
-function initializeSearch(name) {
+function initializeSearch(name,image) {
 
   var centerMap = new google.maps.LatLng(0,0);
 
@@ -107,7 +114,7 @@ function initializeSearch(name) {
     if (status == google.maps.GeocoderStatus.OK) {
         //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
         map.setCenter(results[0].geometry.location);
-        var sites = createSites(results[0].geometry,address,name);
+        var sites = createSites(results[0].geometry,address,name,image);
         setSearchMarkers(map, sites);
         /*infowindow = new google.maps.InfoWindow({
                 content: "loading..."
@@ -116,11 +123,11 @@ function initializeSearch(name) {
 } );
 }
 
-function createSites(geometry,address,name){
+function createSites(geometry,address,name,image){
 
 
  var sites = [
- [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""]
+ [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""+image]
  ];
 
  return sites;
