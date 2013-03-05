@@ -118,14 +118,12 @@ class ColleaguesController < ApplicationController
 
   def search
     name=params[:search]
-  @data = Array.new 
+
   @users=Colleague.where(:name=>name)#.select(:location)
   @users.each do |user| 
     @name=user.name
-    @data[0]=user.location
-    @data[1]=user.attachment
-
-    render :inline => @data
+    @location=user.location
+    render :inline => @location,@name
   end
 
 end
