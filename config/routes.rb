@@ -5,7 +5,7 @@ Worldmap::Application.routes.draw do
     match "colleagues/search" => "colleagues#search"
      match "colleagues/list" => "colleagues#list"
      match "colleagues/searchinloc" => "colleagues#searchinloc"
-     match "colleagues/allpins" =>"colleagues#allpins"
+     match "/colleagues/allpins" =>"colleagues#allpins"
 
      
      
