@@ -75,7 +75,9 @@
 
 function createAllSites(data){
   var sites=[];
+  alert(data);
   var jsonObj = $.parseJSON(data);
+  alert(jsonObj);
   $.each(jsonObj,function(index,value){
     var site=[];
     site.push(value.place);
