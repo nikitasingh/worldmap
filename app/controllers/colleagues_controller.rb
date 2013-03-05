@@ -148,7 +148,6 @@ end
 
 
 
-end
 
 def searchinloc
   name=params[:search]
