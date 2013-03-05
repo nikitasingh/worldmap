@@ -137,7 +137,9 @@ function setMarkers(map, sites) {
 
   for (var i = 0; i < sites.length; i++) {
     var site = sites[i];
+    alert(sites[i]);
     var siteLatLng = new google.maps.LatLng(site[1], site[2]);
+
     var marker = new google.maps.Marker({
       position: siteLatLng,
 
