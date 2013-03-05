@@ -82,7 +82,7 @@ function createAllSites(data){
     site.push(2);
 
 
-    site.push("<div style='text-align:center'><b> Number of employees in "+ value.place+"="+value.count+"<br/>"+value.place+"<br/><a href='/colleagues/list?loc="+ value.place+"' target='_blank'>View full List</a></div>");
+    site.push("<div style='text-align:center'><b> Number of employees in "+ value.place+"="+value.count+"<br/>"+value.place+"<br/><a href='../colleagues/list?loc="+ value.place+"' target='_blank'>View full List</a></div>");
     sites.push(site);
   });
   return sites;
