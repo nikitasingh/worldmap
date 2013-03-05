@@ -42,8 +42,10 @@
 
       },
       success: function(data){
-        
+
         alert(data);
+          var jsonObj = $.parseJSON(data);
+          alert(jsonObj);
        $('#location').val(data);
        address=$('#location').val();
        jQuery("#search_user").html("This Person is based in " +address);
