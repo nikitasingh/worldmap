@@ -13,10 +13,8 @@
    $.ajax({
     url: '../colleagues/allpins',
     error: function (XMLHttpRequest,textStatus,errorThrown) {
-      alert("Something went wrong!! Please try again later.unable to load map");
-alert(errorThrown);
-alert(XMLHttpRequest);
-alert(textStatus);
+      alert("Something went wrong!! Please try again later. Unable to load map");
+
     },
     success: function(data){
 
@@ -44,6 +42,7 @@ alert(textStatus);
 
       },
       success: function(data){
+        alert(data);
        $('#location').val(data);
        address=$('#location').val();
        jQuery("#search_user").html("This Person is based in " +address);
