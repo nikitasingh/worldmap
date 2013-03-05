@@ -45,6 +45,7 @@ alert(textStatus);
       },
       success: function(data){
        $('#location').val(data);
+       image=$('#image').val();
        address=$('#location').val();
        jQuery("#search_user").html("This Person is based in " +address);
   

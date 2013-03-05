@@ -124,7 +124,7 @@ class ColleaguesController < ApplicationController
     @name=user.name
     @location=user.location
     @image=user.attachment
-    render :inline => @location
+    render :inline => @location,@image
   end
 
 end
