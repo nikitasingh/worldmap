@@ -149,11 +149,22 @@ render :inline =>@list
  @end="}"
  @collegues.each do |colleague|
 
+  if colleague.attachment.url.blank?
+  @location= @location+ @start+ 
+  @place + '"'+colleague.location+'",'+
+  @image+'"..'+'../missing.png'+'"' +
+ 
+  @end+","
+
+else
+
   @location= @location+ @start+ 
   @place + '"'+colleague.location+'",'+
   @image+'"..'+colleague.attachment.url(:small)+'"' +
  
   @end+","
+
+end
 
 
 end
