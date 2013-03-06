@@ -2,11 +2,52 @@
 <!DOCTYPE html>
 <html>
 <head>
+   <meta charset="utf-8" />
   <script
   src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false">
   </script>
+   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
   <input type="hidden" value="" id="location"/> 
   <script>
+$(document).ready(function() {
+  var availableTags=[];
+        $.ajax({
+          url: '../colleagues/autocomplete',
+          error: function (XMLHttpRequest,textStatus,errorThrown) {
+          alert("Something went wrong!! Please try again later. Unable to load colleagues list");
+
+      },
+      success: function(data){
+      jQuery("#search_user").html("This Person is based in " +data);
+      var jsonObj = $.parseJSON(data);
+      $.each(jsonObj,function(index,value){
+      availableTags.push(value.name);
+   
+
+  });
+
+
+    },
+    type: "get"
+  });  
+$( "#name" ).autocomplete({
+  source: function( request, response ) {
+    var matches = $.map( availableTags, function(tag) {
+      if ( tag.toUpperCase().indexOf(request.term.toUpperCase()) === 0 ) {
+        return tag;
+      }
+    });
+    response(matches);
+  }
+});
+
+//$( "#name" ).autocomplete({
+//source: availableTags
+//});
+ });
+   
   var infowindow = null;
 
   function initialize() { 
@@ -235,7 +276,7 @@ function setSearchMarkers(map, sites) {
     
 
     <div class="searchbutton">
-      Enter Colleague Name
+     <label for="name"> Enter Colleague Name </label>
       <input type="text" id="name">
       <input type="button" value="search" onclick="center()">
     </div>

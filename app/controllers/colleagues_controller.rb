@@ -104,9 +104,29 @@ class ColleaguesController < ApplicationController
   end
 
 
-  def map
+  def autocomplete
     
-  p "inside maps"
+  p "inside autocomplete"
+
+  @colleagues=Colleague.all
+ @list="["
+ @name='"name":'
+
+ @start="{"
+ @end="}"
+ @colleagues.each do |colleague|
+
+  @list= @list+ @start+ 
+  @name + '"'+colleague.name+'"'+
+  @end+","
+
+
+end
+@list = @list[0..@list.length-2]
+@list = @list +"]"
+
+render :inline =>@list
+
 
   end
 
@@ -121,7 +141,6 @@ class ColleaguesController < ApplicationController
 
   
 
-  p "inside allpinssss"
  @collegues= @users=Colleague.where(:name=>name)
  @location="["
  @place='"place":'
