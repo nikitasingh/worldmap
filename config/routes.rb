@@ -13,6 +13,7 @@ Worldmap::Application.routes.draw do
       get "list"
       get "searchinloc"
       get "allpins"
+      get "autocomplete"
 
     end
 
