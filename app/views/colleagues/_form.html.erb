@@ -22,12 +22,24 @@
     <%= f.text_field :name , :required => true %>
   </div>
 
-  <div class="field" > <font size="3px">Location : </font><br>
+  <div class="field"><font size="3px">Role :</font><br>
+    <%= f.text_field :role , :required => true %>
+  </div>
+
+  <div class="field" > <font size="3px">Office Location : </font><br>
     <%= f.text_field :location, :required => true %>
   </div>
 
   <div class="field" id="Date"> <font size="3px">Project : </font><br>
     <%= f.text_field :project , :required => true %>
+  </div>
+
+  <div class="field" id="Date"> <font size="3px">Email : </font><br>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field" id="Date"> <font size="3px">Contact Number : </font><br>
+    <%= f.text_field :contactnum %>
   </div>
 
 
