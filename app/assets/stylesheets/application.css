@@ -11,30 +11,70 @@
  *= require_self
  *= require_tree .
  */
+html,
+body {
 
- #wrapper {
-  width:960px;
+
+
+}
+.wrapper {
+
+min-height:100%;
+position:relative;
+width:960px;
 }
 
+.content {
+background-image:url('main_bg.jpg');
+background-repeat:repeat-y;
+
+width:960px;
+}
+
+.header
+{
+
+background-image:url('header.jpg');
+background-repeat:no-repeat;
+  padding: 10px;
+  padding-bottom:20px;
+  height: 75px;
+  float: center;
+
+}
 .ajaxresult
 {
-	margin-left: 1000px;
-float: right;
-width: 20%;
+
 }
 .searchbutton
 {
-	margin-left: 900px;
-float: right;
-width: 20%;
-margin-top: -2px;
-padding-top: 40px;
+
+  padding-bottom:20px;
+  padding-top:20px;
+
+
 }
+
+.div_hover {background-image:url('icon_map.png'); 
+background-repeat:no-repeat;
+}
+
+.div_hover:hover { background-image:url('icon_map_selected.png'); 
+background-repeat:no-repeat;}
+
+
+
+.hr {
+  height: 5px;
+  width: 800px;
+  background: #FF8000 ;
+ }
+
 .map
 {border:2px solid;
-width: 100%;
+width: 960px;
  height: 500px;
- float: left;
+
  margin-top: 5px;
  }
  .userlist

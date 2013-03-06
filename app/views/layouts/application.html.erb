@@ -1,33 +1,38 @@
-<center><html>
-  <div id="wrapper">
+<!DOCTYPE html>
+<%= javascript_include_tag :defaults %>
+<html>
 <head>
-  <title>Worldmap</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application","map" %>
+   <title>Worldmap</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
 
-  <%= csrf_meta_tags %>
-
-
-
-<style>
-      ul.nav li.dropdown:hover ul.dropdown-menu{
-        display: block;
-      }
-      body{
-        padding: 40px 0 40px 0;
-
-      }
- </style>
 
 </head>
 <body>
-	<%= render 'shared/header' %>
-	</br>
-    </br>
+<center><div class="wrapper">
+<div class="header">
 
 
-<%= yield %>
-
-</body>
 </div>
+
+<div class="content">
+  <div class="menubar">
+
+
+  <%= yield %>
+</div>
+
+
+
+<div class="footer">
+  <center>  </center>
+</div>
+
+</div>
+
+</center>
+</body>
+
+
 </html>

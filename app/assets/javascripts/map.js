@@ -80,7 +80,7 @@ $( "#name" ).autocomplete({
  
     address=value.place;
     image=value.image;
-    alert(image);
+
     
   });
     
