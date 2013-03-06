@@ -1,3 +1,10 @@
+<%= link_to image_tag("icon_list_selected.png", :alt => "Manage Colleagues"), colleagues_path %>
+<%= link_to image_tag("icon_map.png",  :alt => "View Map"),  map_colleagues_path %>
+
+
+
+<div class="hr"></div>
+</div>
 <h1>Colleagues</h1>
 
 
@@ -10,11 +17,8 @@
        
           <td style=" padding-right: 5px; padding-left: 5px;width: 200px "> </td>
           <td style=" padding-right: 5px; padding-left: 5px;width: 100px "><font size="3"><b>Name </b></font></td>
-          <td style=" padding-right: 5px; padding-left: 5px;width: 100px "><font size="3"><b>Role </b></font></td>
-          <td style=" padding-right: 5px; padding-left: 5px;width: 100px"><font size="3"><b>Office Location </b></font></td>
+          <td style=" padding-right: 5px; padding-left: 5px;width: 100px"><font size="3"><b>Location </b></font></td>
           <td style=" padding-right: 5px; padding-left: 5px;width: 100px "><font size="3"><b>Project </b></font></td>
-          <td style=" padding-right: 5px; padding-left: 5px;width: 100px "><font size="3"><b>Email </b></font></td>
-          <td style=" padding-right: 5px; padding-left: 5px;width: 100px "><font size="3"><b>Contact Number </b></font></td>
           <td style=" padding-right: 5px; padding-left: 5px;width: 50px "> </td>
           <td> </td>
 
@@ -30,24 +34,9 @@
           <% end %>
           
           <td style=" padding-right: 5px; padding-left: 5px; width: 50px"><%= link_to colleague.name, colleague %></td>
-
-          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px "><%= colleague.role %></td>
-         
-         <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px "><%= colleague.location %></td>
+          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px "><%= colleague.location %></td>
 
           <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px "><%= colleague.project %></td>
-
-          <%  if colleague.email.blank? %>
-          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px ">Not Available</td>
-          <% else %>
-          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px " align="center">  <%=colleague.email %></td>
-          <% end %>
-
-          <%  if colleague.contactnum.blank? %>
-          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px ">Not Available</td>
-          <% else %>
-          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px " align="center">  <%=colleague.contactnum %></td>
-          <% end %>
 
           
 
