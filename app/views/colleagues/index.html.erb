@@ -5,68 +5,46 @@
 
 <div class="hr"></div>
 </div>
-<h1>Colleagues</h1>
-
-
-  <div style="height: 50px">
-  </div>
-
-<table class="table table-hover" style="width: 700px ">
+<div class="list_content">
+<table border="0">
      <thead> 
-      <tr>
-       
-          <td style=" padding-right: 5px; padding-left: 5px;width: 200px "> </td>
-          <td style=" padding-right: 5px; padding-left: 5px;width: 100px "><font size="3"><b>Name </b></font></td>
-
-          <td style=" padding-right: 5px; padding-left: 5px;width: 100px "><font size="3"><b>Role </b></font></td>
-
-          <td style=" padding-right: 5px; padding-left: 5px;width: 100px "><font size="3"><b>Office Location </b></font></td>
-
-          <td style=" padding-right: 5px; padding-left: 5px;width: 100px "><font size="3"><b>Project </b></font></td>  
-
-          <td style=" padding-right: 5px; padding-left: 5px;width: 100px"><font size="3"><b>Email </b></font></td>
-
-          <td style=" padding-right: 5px; padding-left: 5px;width: 100px"><font size="3"><b>Contact Number </b></font></td>
-
-          <td style=" padding-right: 5px; padding-left: 5px;width: 50px "> </td>
-          <td> </td>
-
-      </tr>
+     
      </thead>
       <tbody>
    <% @colleagues.each do |colleague| %>
-      <tr>
-        <%  if colleague.attachment.blank? %>
-          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px " align="center">  <%= image_tag ("missing.png") %></td>
-          <% else %>
-          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px " align="center">  <%= image_tag colleague.attachment.url(:medium) %></td>
-          <% end %>
+      <tr >
+      
+          <td width="10%"><%= image_tag colleague.attachment.url(:thumb) %></td>
+          <td><%= link_to colleague.name, colleague %><br/>
+           <%= colleague.project %><br/>
+           <%= colleague.location %><br/>
+           
+         </td>
+         <td>E-mail<br/>
+           Office<br/>
+          Mobile<br/>
+         </td>
           
-          <td style=" padding-right: 5px; padding-left: 5px; width: 50px"><%= link_to colleague.name, colleague %></td>
-
-          <td style=" padding-right: 5px; padding-left: 5px; width: 50px"><%= colleague.role %></td>
-
-          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px "><%= colleague.location %></td>
-
-          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px "><%= colleague.project %></td>
-
-          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px "><%= colleague.email %></td>
-
-          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px "><%= colleague.contactnum %></td>
-
-          
-
-           <td style=" padding-right: 5px; padding-left: 5px;  "><b><%= link_to(image_tag("edit.png", :border => 0) , edit_colleague_path(colleague) )%></b></td>
-
-           <td style=" padding-right: 5px; padding-left: 5px;  "><b><%= link_to(image_tag("destroy.png", :border => 0), colleague, confirm: 'Are you sure?', method: :delete )%></b></td>
-
+          <td width="5%"><b><%= link_to(image_tag("edit2.png", :border => 0) , edit_colleague_path(colleague) )%></b></td>
+          <td width="5%"><b><%= link_to(image_tag("remove2.png", :border => 0), colleague, confirm: 'Are you sure?', method: :delete )%></b></td>
+ </tr>
+<tr><td colspan="6"><div class="table_hr"></div>
+</td></tr>
            <% end %>
 
 
-      </tr>       
+            
       </tbody>
     </table>
-
-<br />
-
-<%= link_to 'New Colleague', new_colleague_path , :class=> 'btn  btn-custom' %>
+    <br />
+<%= link_to(image_tag("add2.png", :border => 0) , new_colleague_path )%>
+<br/>
+<br/>
+<br/>
+</div>
+<br/>
+<br/>
+</div>
+<br/>
+<br/>
+<br/>
