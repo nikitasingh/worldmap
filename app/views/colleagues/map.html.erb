@@ -1,12 +1,17 @@
 
-<%= link_to image_tag("icon_map_selected.png",  :alt => "View Map"),  map_colleagues_path %>
-<%= link_to image_tag("icon_list.png", :alt => "Manage Colleagues"), colleagues_path %>
+
+<div style="display: inline-block; float: center">
+  <%= link_to image_tag("icon_map_selected.png",  :alt => "View Map"),  map_colleagues_path %>
+  <%= link_to image_tag("icon_list.png", :alt => "Manage Colleagues"), colleagues_path %>
+</div>
+
+<div style="float: right; display:inline-block; ">
+
+  <input id="name" type="text" size="40" value="Enter Colleague Name" onfocus="if(this.value=='Enter Colleague Name')this.value=''" onblur="if(this.value=='')this.value='Enter Colleague Name'" onKeydown="Javascript: if (event.keyCode==13) center();" />
+  <input style="display:inline-block vertical-align:middle" type="button" value="Search" onclick="center()" class="btn  btn-custom" >
 
 
-          <input id="name" type="text" size="40" value="Enter Colleague Name" onfocus="if(this.value=='Enter Colleague Name')this.value=''" onblur="if(this.value=='')this.value='Enter Colleague Name'" onKeydown="Javascript: if (event.keyCode==13) center();" />
-   
-          <input type="button" value="Search" onclick="center()" class="btn  btn-custom" >
-    
+</div>
 
 
 
@@ -15,36 +20,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="utf-8" />
-  <script
-  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false">
-  </script>
-   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+ <meta charset="utf-8" />
+ <script
+ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false">
+ </script>
+
+ <style type="text/css">
+ img[src*="iws3.png"] {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-  <input type="hidden" value="" id="location"/> 
-  <script>
+<input type="hidden" value="" id="location"/> 
+<script>
+
+
+
+
+
+
 $(document).ready(function() {
   var availableTags=[];
-        $.ajax({
-          url: '../colleagues/autocomplete',
-          error: function (XMLHttpRequest,textStatus,errorThrown) {
-          alert("Something went wrong!! Please try again later. Unable to load colleagues list");
+  $.ajax({
+    url: '../colleagues/autocomplete',
+    error: function (XMLHttpRequest,textStatus,errorThrown) {
+      alert("Something went wrong!! Please try again later. Unable to load colleagues list");
 
-      },
-      success: function(data){
+    },
+    success: function(data){
       jQuery("#search_user").html("This Person is based in " +data);
       var jsonObj = $.parseJSON(data);
       $.each(jsonObj,function(index,value){
-      availableTags.push(value.name);
-   
+        availableTags.push(value.name);
 
-  });
+
+      });
 
 
     },
     type: "get"
   });  
+
 $( "#name" ).autocomplete({
   source: function( request, response ) {
     var matches = $.map( availableTags, function(tag) {
@@ -60,82 +80,83 @@ $( "#name" ).autocomplete({
     }
 });
 
-//$( "#name" ).autocomplete({
-//source: availableTags
-//});
- });
-   
-  var infowindow = null;
+});
 
-  function initialize() { 
-   $.ajax({
-    url: '../colleagues/allpins',
-    error: function (XMLHttpRequest,textStatus,errorThrown) {
-      alert("Something went wrong!! Please try again later. Unable to load map");
+var infowindow = null;
+
+
+function initialize() { 
+ $.ajax({
+  url: '../colleagues/allpins',
+  error: function (XMLHttpRequest,textStatus,errorThrown) {
+    alert("Something went wrong!! Please try again later. Unable to load map");
+
+  },
+  success: function(data){
+
+    initializePage(data); 
+
+  },
+  type: "get"
+});  
+
+}
+
+$(document).ready(initialize);
+var address ;
+
+
+function center()
+{
+
+  name=document.getElementById("name").value;
+
+  $.ajax({
+    url: '../colleagues/search?search='+name,
+    error: function (XMLHttpRequest, textStatus, errorThrown) {
+      alert("Something went wrong!! Please try again later.");
 
     },
     success: function(data){
 
-      initializePage(data); 
 
+      var jsonObj = $.parseJSON(data);
+
+
+
+      $.each(jsonObj,function(index,value){
+
+        address=value.place;
+        image=value.image;
+
+      });
+
+
+
+      jQuery("#search_user").html("This Person is based in " +address);
+
+      initializeSearch(name,address,image);
     },
     type: "get"
   });  
+}
+function initializePage(data) {
 
- }
+  var centerMap = new google.maps.LatLng(0,0);
 
-  $(document).ready(initialize);
-  var address ;
-  
-
-  function center()
-  {
-
-    name=document.getElementById("name").value;
-    
-    $.ajax({
-      url: '../colleagues/search?search='+name,
-      error: function (XMLHttpRequest, textStatus, errorThrown) {
-        alert("Something went wrong!! Please try again later.");
-
-      },
-      success: function(data){
-
-    
-          var jsonObj = $.parseJSON(data);
-
-
-
-            $.each(jsonObj,function(index,value){
- 
-    address=value.place;
-    image=value.image;
-
-  });
-    
-  
-       
-       jQuery("#search_user").html("This Person is based in " +address);
-  
-       initializeSearch(name,address,image);
-     },
-     type: "get"
-   });  
+  var myOptions = {
+    zoom: 2,
+    center: centerMap,
+    minZoom: 2, 
+    mapTypeId: google.maps.MapTypeId.ROADMAP
   }
-  function initializePage(data) {
 
-    var centerMap = new google.maps.LatLng(0,0);
+  var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-    var myOptions = {
-      zoom: 2,
-      center: centerMap,
-      minZoom: 2, 
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
 
-    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-    var sites = createAllSites(data);
-    setMarkers(map, sites);
+  var sites = createAllSites(data);
+  setMarkers(map, sites);
+
         /*infowindow = new google.maps.InfoWindow({
                 content: "loading..."
               });*/
@@ -181,7 +202,7 @@ function initializeSearch(name,address,image) {
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
         //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
-      
+
         map.setCenter(results[0].geometry.location);
         var sites = createSites(results[0].geometry,address,name,image);
         setSearchMarkers(map, sites);
@@ -214,7 +235,7 @@ function setMarkers(map, sites) {
 
   for (var i = 0; i < sites.length; i++) {
     var site = sites[i];
-  
+
     var siteLatLng = new google.maps.LatLng(site[1], site[2]);
 
     var marker = new google.maps.Marker({
@@ -245,7 +266,7 @@ function setSearchMarkers(map, sites) {
 
   for (var i = 0; i < sites.length; i++) {
     var site = sites[i];
-  
+
     var siteLatLng = new google.maps.LatLng(site[1], site[2]);
 
     var marker = new google.maps.Marker({
@@ -277,10 +298,10 @@ function setSearchMarkers(map, sites) {
     });
     infowindow.open(map, marker);
   } 
-    google.maps.event.addListener(infowindow, 'closeclick', function() {  
+  google.maps.event.addListener(infowindow, 'closeclick', function() {  
 
     initialize(); 
-})
+  })
 
 
 }
@@ -290,11 +311,11 @@ function setSearchMarkers(map, sites) {
 
 <body>
 
-    
 
 
 
-    <div id="map_canvas" class="map"></div>
+
+  <div id="map_canvas" class="map"></div>
 
 
 
