@@ -105,7 +105,7 @@ class ColleaguesController < ApplicationController
 
 
   def autocomplete
-    
+
     p "inside autocomplete"
 
     @colleagues=Colleague.all
@@ -139,7 +139,7 @@ class ColleaguesController < ApplicationController
   def search
     name=params[:search]
 
-    
+
 
     @collegues= @users=Colleague.where(:name=>name)
     @location="["
@@ -149,11 +149,11 @@ class ColleaguesController < ApplicationController
     @end="}"
     @collegues.each do |colleague|
 
-      if colleague.attachment.url.blank?
+      if colleague.attachment.blank?
         @location= @location+ @start+ 
         @place + '"'+colleague.location+'",'+
-        @image+'"..'+'../missing.png'+'"' +
-        
+        @image+'"..'+'../missing-small.png'+'"' +
+
         @end+","
 
       else
@@ -161,7 +161,7 @@ class ColleaguesController < ApplicationController
         @location= @location+ @start+ 
         @place + '"'+colleague.location+'",'+
         @image+'"..'+colleague.attachment.url(:small)+'"' +
-        
+
         @end+","
 
       end

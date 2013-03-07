@@ -6,6 +6,7 @@
 <div class="hr"></div>
 </div>
 <div class="list_content">
+
      <%= paginate @colleagues %>
 <table border="0">
      <thead> 
@@ -15,7 +16,14 @@
    <% @colleagues.each do |colleague| %>
       <tr >
       
-          <td width="10%"><%= image_tag colleague.attachment.url(:thumb) %></td>
+           <% @colleagues.each do |colleague| %>
+
+     <tr>
+      <%  if colleague.attachment.blank? %>
+      <td >  <%= image_tag ("missing-small.png") %></td>
+      <% else %>
+      <td >  <%= image_tag colleague.attachment.url(:small) %></td>
+      <% end %>
           <td><%= link_to colleague.name, colleague %><br/>
            <%= colleague.project %><br/>
            <%= colleague.location %><br/>
@@ -38,6 +46,7 @@
       </tbody>
     </table>
     <br />
+
 <%= link_to(image_tag("add2.png", :border => 0) , new_colleague_path )%>
 <br/>
 <br/>
