@@ -17,8 +17,17 @@
        
           <td style=" padding-right: 5px; padding-left: 5px;width: 200px "> </td>
           <td style=" padding-right: 5px; padding-left: 5px;width: 100px "><font size="3"><b>Name </b></font></td>
-          <td style=" padding-right: 5px; padding-left: 5px;width: 100px"><font size="3"><b>Location </b></font></td>
-          <td style=" padding-right: 5px; padding-left: 5px;width: 100px "><font size="3"><b>Project </b></font></td>
+
+          <td style=" padding-right: 5px; padding-left: 5px;width: 100px "><font size="3"><b>Role </b></font></td>
+
+          <td style=" padding-right: 5px; padding-left: 5px;width: 100px "><font size="3"><b>Office Location </b></font></td>
+
+          <td style=" padding-right: 5px; padding-left: 5px;width: 100px "><font size="3"><b>Project </b></font></td>  
+
+          <td style=" padding-right: 5px; padding-left: 5px;width: 100px"><font size="3"><b>Email </b></font></td>
+
+          <td style=" padding-right: 5px; padding-left: 5px;width: 100px"><font size="3"><b>Contact Number </b></font></td>
+
           <td style=" padding-right: 5px; padding-left: 5px;width: 50px "> </td>
           <td> </td>
 
@@ -28,15 +37,22 @@
    <% @colleagues.each do |colleague| %>
       <tr>
         <%  if colleague.attachment.blank? %>
-          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px ">Not Available</td>
+          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px " align="center">  <%= image_tag ("missing.png") %></td>
           <% else %>
           <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px " align="center">  <%= image_tag colleague.attachment.url(:small) %></td>
           <% end %>
           
           <td style=" padding-right: 5px; padding-left: 5px; width: 50px"><%= link_to colleague.name, colleague %></td>
+
+          <td style=" padding-right: 5px; padding-left: 5px; width: 50px"><%= colleague.role %></td>
+
           <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px "><%= colleague.location %></td>
 
           <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px "><%= colleague.project %></td>
+
+          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px "><%= colleague.email %></td>
+
+          <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px "><%= colleague.contactnum %></td>
 
           
 
