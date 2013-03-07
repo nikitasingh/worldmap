@@ -145,7 +145,7 @@ function createAllSites(data){
     site.push(2);
 
 
-    site.push("<div style='text-align:center'><b> Number of employees in "+ value.place+"="+value.count+"<br/>"+value.place+"<br/><a href='../colleagues/list?loc="+ value.place+"' target='_blank'>View full List</a></div>");
+    site.push("<div style='text-align:center'><b>Location : "+ value.place+"<br/>Total Number of Colleagues : "+value.count+"<br/><br/><a href='../colleagues/list?loc="+ value.place+"' target='_blank'>View List</a></div>");
     sites.push(site);
   });
   return sites;
@@ -188,7 +188,7 @@ function createSites(geometry,address,name){
 
 
  var sites = [
- [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""+"<br/><br/><img src='"+image+"'>"]
+ [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><b>"+name+"<br/>Based in :"+address+""+"<br/><br/><img src='"+image+"'>"]
  ];
 
  return sites;
