@@ -54,7 +54,8 @@ $( "#name" ).autocomplete({
     });
     response(matches);
   },
-    select: function () {
+ select: function (a,b) {
+      $(this).val(b.item.value);
      center();
     }
 });
