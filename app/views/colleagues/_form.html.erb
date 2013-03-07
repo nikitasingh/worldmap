@@ -14,48 +14,39 @@
 
 
 
+<table>
+  <tr>
+    <td> <div class="field"><font size="3px">Name :</font></td>
+    <td>  <%= f.text_field :name , :required => true %></td>
+  </tr>
+  <tr>
+    <td> <font size="3px">Location : </font></td>
+    <td> <%= f.text_field :location, :required => true %></td>
+  </tr>
+  <tr>
+    <td> <font size="3px">Project : </font></td>
+    <td>  <%= f.text_field :project , :required => true %></td>
+  </tr>
+  <tr>
+    <td><font size="3px">Contact Number :</td>
+    <td>  <%= f.text_field :contactnum %></td>
+  </tr>
+  <tr>
+    <td><font size="3px">Email ID :</td>
+    <td>  <%= f.text_field :email %></td>
+  </tr>
+  <tr>
+    <td><font size="3px">Attach Picture :</td>
+    <td> <%= f.file_field :attachment %></td>
+  </tr>
+</table>
+<br/>
+ <%= f.submit "Save", :class=> 'btn btn-primary' %>
 
-<div style="height: 50px">
-</div>
-<div class="well span4">
-  <div class="field"><font size="3px">Name :</font><br>
-    <%= f.text_field :name , :required => true %>
-  </div>
-
-  <div class="field"><font size="3px">Role :</font><br>
-    <%= f.text_field :role , :required => true %>
-  </div>
-
-  <div class="field" > <font size="3px">Office Location : </font><br>
-    <%= f.text_field :location, :required => true %>
-  </div>
-
-  <div class="field" id="Date"> <font size="3px">Project : </font><br>
-    <%= f.text_field :project , :required => true %>
-  </div>
-
-  <div class="field" id="Date"> <font size="3px">Email : </font><br>
-    <%= f.text_field :email %>
-  </div>
-
-  <div class="field" id="Date"> <font size="3px">Contact Number : </font><br>
-    <%= f.text_field :contactnum %>
-  </div>
-
-
-  <div class="field"> <font size="3px">Attach Picture : </font><br>
-    <%= f.file_field :attachment %>
-  </div>
-
-
-
-  <div style="height: 50px">
-  </div>
-
-  <div> <%= f.submit "Save", :class=> 'btn btn-primary' %></div>
-
-  <div> <%= link_to 'Back', colleagues_path, :class=> 'btn' %></div>
+   <%= link_to 'Back', colleagues_path, :class=> 'btn' %>
 
 </div>
 
 <% end %>
+
+<br/>
