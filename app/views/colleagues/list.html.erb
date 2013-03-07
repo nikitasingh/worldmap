@@ -1,21 +1,69 @@
 
 <div class="userlist">
-	<h2>Colleagues in <%="#{params[:loc]}"%></h2>
+  <h2>Colleagues in <%="#{params[:loc]}"%></h2>
 <input type="text" id="name">
 <input type="button" value="search" onclick="searchUserinLocation("<%="#{params[:loc]}"%>")" />
  <br/>
-<% user=Colleague.where(:location=>  params[:loc]).select(:name).sample(5) %>
-  <% user.each do |username|  %>
- <%= username.name %>
- <br/>
-  
- <% end %>
+<% user=Colleague.where(:location=>  params[:loc]).sample(5) %>
+
 </div>
+
+<%= link_to image_tag("icon_list_selected.png", :alt => "Manage Colleagues"), colleagues_path %>
+<%= link_to image_tag("icon_map.png",  :alt => "View Map"),  map_colleagues_path %>
+
+
+
+<div class="hr"></div>
+</div>
+<div class="list_content">
+<table border="0">
+     <thead> 
+     
+     </thead>
+      <tbody>
+   <% user.each do |colleague| %>
+      <tr >
+      
+          <td width="10%"><%= image_tag colleague.attachment.url(:thumb) %></td>
+          <td><%= link_to colleague.name, colleague %><br/>
+           <%= colleague.project %><br/>
+           
+           
+         </td>
+         <td>E-mail<br/>
+           Office<br/>
+          Mobile<br/>
+         </td>
+          
+          <td width="5%"><b><%= link_to(image_tag("edit2.png", :border => 0) , edit_colleague_path(colleague) )%></b></td>
+          <td width="5%"><b><%= link_to(image_tag("remove2.png", :border => 0), colleague, confirm: 'Are you sure?', method: :delete )%></b></td>
+ </tr>
+<tr><td colspan="6"><div class="table_hr"></div>
+</td></tr>
+           <% end %>
+
+
+            
+      </tbody>
+    </table>
+    <br />
+
+<br/>
+<br/>
+<br/>
+</div>
+<br/>
+<br/>
+</div>
+<br/>
+<br/>
+<br/>
+
 <script type="text/javascript">
 function searchUserinLocation(location)
 {
-	alert(location);
-	 name=document.getElementById("name").value;
+  alert(location);
+   name=document.getElementById("name").value;
     
      $.ajax({
     url: '/colleagues/searchinloc?search='+name+'&loc='+location,
