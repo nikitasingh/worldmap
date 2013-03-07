@@ -131,8 +131,7 @@ class ColleaguesController < ApplicationController
   end
 
   def list
-
-
+    @colleagues= Colleague.where(:location=>  params[:loc]).page(params[:page]).per(5).order("id asc")
 
   end
 
