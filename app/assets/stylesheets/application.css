@@ -30,6 +30,15 @@ background-repeat:repeat-y;
 
 width:960px;
 }
+.list_content {
+background-color: #fff;
+width:800px;
+ margin-top: 20px;
+ margin-bottom: 20px;
+  border:1px solid ;
+  border-color: #E6E6E6;
+
+}
 
 .header
 {
@@ -41,11 +50,15 @@ background-repeat:no-repeat;
   height: 75px;
   float: center;
 
+
 }
 .ajaxresult
 {
 
 }
+
+
+
 .searchbutton
 {
 
@@ -62,14 +75,25 @@ background-repeat:no-repeat;
 .div_hover:hover { background-image:url('icon_map_selected.png'); 
 background-repeat:no-repeat;}
 
+input[type="button"] {
+background: #0174DF;
+color:#fff;
+   font-weight: bold;
+   cursor: pointer;
 
+}
 
 .hr {
   height: 5px;
-  width: 800px;
+  width: 900px;
   background: #FF8000 ;
  }
 
+.table_hr {
+  height: 2px;
+  width: auto;
+  background: #E6E6E6;
+ }
 .map
 {border:2px solid;
 width: 960px;
