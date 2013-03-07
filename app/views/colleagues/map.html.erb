@@ -283,15 +283,24 @@ function setSearchMarkers(map, sites) {
 
     
 
-    <div class="searchbutton">
-  
-<input id="name" type="text" size="40" value="Enter Colleague Name" onfocus="if(this.value=='Enter Colleague Name')this.value=''" onblur="if(this.value=='')this.value='Enter Colleague Name'" onKeydown="Javascript: if (event.keyCode==13) center();" />
-      <input type="button" value="search" onclick="center()" >
-   
-    </div>
+  <div class="searchbutton">
+    <table>
+      <tr>
+
+        <td valign="center">
+          <input id="name" type="text" size="40" value="Enter Colleague Name" onfocus="if(this.value=='Enter Colleague Name')this.value=''" onblur="if(this.value=='')this.value='Enter Colleague Name'" onKeydown="Javascript: if (event.keyCode==13) center();" />
+        </td>
+        <td valign="center">
+          <input type="button" value="search" onclick="center()" class="btn  btn-custom" >
+        </td>
+
+      </tr>
+    </table>
+
+
+  </div>
 
     <div id="map_canvas" class="map"></div>
-
 
 
 

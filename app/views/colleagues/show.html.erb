@@ -10,7 +10,7 @@
     <thead>
       <tr> 
        <%  if @colleague.attachment.blank? %>
-       <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px " align="center">  <%= image_tag ("missing.png") %></td>
+       <td style=" padding-right: 5px; padding-left: 5px; min-width: 50px " align="center">  <%= image_tag ("missing-medium.png") %></td>
        <% else %>
        <td style=" padding-right: 5px; padding-left: 5px" align="center"><%= image_tag @colleague.attachment.url(:medium) %></td>
        <% end %>
