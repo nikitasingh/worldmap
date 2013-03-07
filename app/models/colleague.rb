@@ -1,6 +1,8 @@
 class Colleague < ActiveRecord::Base
   attr_accessible :location, :name, :project, :latitude, :longitude, :longlat
 
+  attr_accessible :email, :role, :contactnum
+
   attr_accessible :attachment
 
   attr_accessor :attachment,:longlat
