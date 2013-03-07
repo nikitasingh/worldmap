@@ -2,7 +2,7 @@ class ColleaguesController < ApplicationController
   # GET /colleagues
   # GET /colleagues.json
   def index
-    @colleagues = Colleague.all
+    @colleagues= Colleague.page(params[:page]).per(2).order("id asc")
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @colleagues }

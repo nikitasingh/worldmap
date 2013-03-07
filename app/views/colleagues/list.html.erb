@@ -4,7 +4,7 @@
 <input type="text" id="name">
 <input type="button" value="search" onclick="searchUserinLocation("<%="#{params[:loc]}"%>")" />
  <br/>
-<% user=Colleague.where(:location=>  params[:loc]).sample(5) %>
+<% user= Colleague.where(:location=>  params[:loc]).page(params[:page]).per(2).order("id asc") %>
 
 </div>
 
@@ -16,6 +16,7 @@
 <div class="hr"></div>
 </div>
 <div class="list_content">
+     <%= paginate user %>
 <table border="0">
      <thead> 
      
