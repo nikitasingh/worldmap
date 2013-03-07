@@ -150,9 +150,16 @@ class ColleaguesController < ApplicationController
     @collegues.each do |colleague|
 
       if colleague.attachment.blank?
+
+        p "^^^^^^^^^^^^^^^^"
+        p "inside if of controller"
+
+        p "^^^^^^^^^^^^^^^^"
+
+
         @location= @location+ @start+ 
         @place + '"'+colleague.location+'",'+
-        @image+'"..'+'../missing-small.png'+'"' +
+        @image+'"'+'missing-small.png'+'"' +
 
         @end+","
 
