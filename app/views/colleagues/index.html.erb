@@ -14,11 +14,7 @@
    <% @colleagues.each do |colleague| %>
       <tr >
       
-          <%  if colleague.attachment.blank? %>
-          <td >  <%= image_tag ("missing.png") %></td>
-          <% else %>
-          <td >  <%= image_tag colleague.attachment.url(:medium) %></td>
-          <% end %>
+          <td width="10%"><%= image_tag colleague.attachment.url(:thumb) %></td>
           <td><%= link_to colleague.name, colleague %><br/>
            <%= colleague.project %><br/>
            <%= colleague.location %><br/>
