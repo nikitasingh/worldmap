@@ -1,5 +1,6 @@
-<%= link_to image_tag("icon_list_selected.png", :alt => "Manage Colleagues"), colleagues_path %>
 <%= link_to image_tag("icon_map.png",  :alt => "View Map"),  map_colleagues_path %>
+<%= link_to image_tag("icon_list_selected.png", :alt => "Manage Colleagues"), colleagues_path %>
+
 
 
 
@@ -23,7 +24,7 @@
       <% else %>
       <td >  <%= image_tag colleague.attachment.url(:small) %></td>
       <% end %>
-          <td width="5%"><%= link_to colleague.name, colleague %><br/>
+          <td width="5%"><%= colleague.name %><br/>
            <%= colleague.project %><br/>
            <%= colleague.location %><br/>
            
