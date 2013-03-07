@@ -1,5 +1,5 @@
 
-
+    <%= javascript_include_tag "map" %>
 <%= link_to image_tag("icon_list.png", :alt => "Manage Colleagues"), colleagues_path %>
 <%= link_to image_tag("icon_map_selected.png",  :alt => "View Map"),  map_colleagues_path %>
 
@@ -20,7 +20,7 @@
   <input type="hidden" value="" id="location"/> 
   <script>
 
-</script>
+</script>    <%= javascript_include_tag "application","map" %>
 </head>
 
 <body>
