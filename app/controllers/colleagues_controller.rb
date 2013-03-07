@@ -2,7 +2,7 @@ class ColleaguesController < ApplicationController
   # GET /colleagues
   # GET /colleagues.json
   def index
-    @colleagues = Colleague.all
+    @colleagues= Colleague.page(params[:page]).per(5).order("id asc")
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @colleagues }
@@ -63,7 +63,7 @@ class ColleaguesController < ApplicationController
     respond_to do |format|
       if !(latlong.blank?)
         if @colleague.save 
-          format.html { redirect_to @colleague, notice: 'Colleague was successfully created.' }
+          format.html { redirect_to colleagues_path, notice: 'Colleague was successfully created.' }
           format.json { render json: @colleague, status: :created, location: @colleague }
         else
           format.html { render action: "new" }

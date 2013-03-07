@@ -4,18 +4,19 @@
 <input type="text" id="name">
 <input type="button" value="search" onclick="searchUserinLocation("<%="#{params[:loc]}"%>")" />
  <br/>
-<% user=Colleague.where(:location=>  params[:loc]).sample(5) %>
+<% user= Colleague.where(:location=>  params[:loc]).page(params[:page]).per(5).order("id asc") %>
 
 </div>
-
-<%= link_to image_tag("icon_list.png", :alt => "Manage Colleagues"), colleagues_path %>
 <%= link_to image_tag("icon_map.png",  :alt => "View Map"),  map_colleagues_path %>
+<%= link_to image_tag("icon_list.png", :alt => "Manage Colleagues"), colleagues_path %>
+
 
 
 
 <div class="hr"></div>
 </div>
 <div class="list_content">
+     <%= paginate user %>
 <table border="0">
      <thead> 
      
@@ -25,7 +26,7 @@
       <tr >
       
           <td width="10%"><%= image_tag colleague.attachment.url(:thumb) %></td>
-          <td><%= link_to colleague.name, colleague %><br/>
+          <td><b><%= colleague.name %> </b><br/>
            <%= colleague.project %><br/>
            
            
@@ -34,11 +35,9 @@
            Office<br/>
           Mobile<br/>
          </td>
-          
-          <td width="5%"><b><%= link_to(image_tag("edit2.png", :border => 0) , edit_colleague_path(colleague) )%></b></td>
-          <td width="5%"><b><%= link_to(image_tag("remove2.png", :border => 0), colleague, confirm: 'Are you sure?', method: :delete )%></b></td>
+       
  </tr>
-<tr><td colspan="6"><div class="table_hr"></div>
+<tr><td colspan="4"><div class="table_hr"></div>
 </td></tr>
            <% end %>
 
