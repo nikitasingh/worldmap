@@ -19,11 +19,11 @@
 
      <tr>
       <%  if colleague.attachment.blank? %>
-      <td >  <%= image_tag ("missing-small.png") %></td>
+      <td width="5%" >  <%= image_tag ("missing-small.png") %></td>
       <% else %>
       <td >  <%= image_tag colleague.attachment.url(:small) %></td>
       <% end %>
-          <td><%= link_to colleague.name, colleague %><br/>
+          <td width="5%"><%= link_to colleague.name, colleague %><br/>
            <%= colleague.project %><br/>
            <%= colleague.location %><br/>
            
