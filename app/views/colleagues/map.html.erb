@@ -64,20 +64,22 @@ $(document).ready(function() {
     },
     type: "get"
   });  
-  $( "#name" ).autocomplete({
-    source: function( request, response ) {
-      var matches = $.map( availableTags, function(tag) {
-        if ( tag.toUpperCase().indexOf(request.term.toUpperCase()) === 0 ) {
-          return tag;
-        }
-      });
-      response(matches);
-    }
-  });
 
-//$( "#name" ).autocomplete({
-//source: availableTags
-//});
+$( "#name" ).autocomplete({
+  source: function( request, response ) {
+    var matches = $.map( availableTags, function(tag) {
+      if ( tag.toUpperCase().indexOf(request.term.toUpperCase()) === 0 ) {
+        return tag;
+      }
+    });
+    response(matches);
+  },
+ select: function (a,b) {
+      $(this).val(b.item.value);
+     center();
+    }
+});
+
 });
 
 var infowindow = null;
