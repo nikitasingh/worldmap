@@ -40,8 +40,21 @@
         <td style="min-width:100px">
           <br/><br/>
           <b>Office Location : </b><%= colleague.location %><br/>
-          <b>E-mail : </b><%= colleague.email %><br/>
-          <b>Contact Number : </b><%= colleague.contactnum %><br/>
+
+
+          <%  if colleague.email.blank? %>
+            <b>E-mail : </b>Not Available<br/>
+          <% else %>
+            <b>E-mail : </b><%= colleague.email %><br/>
+          <% end %>
+
+          <%  if colleague.contactnum.blank? %>
+            <b>Contact Number : </b>Not Available<br/>
+          <% else %>
+            <b>Contact Number : </b><%= colleague.contactnum %><br/>
+          <% end %>
+
+
        </td>
 
        <td width="5%"><b><%= link_to(image_tag("edit2.png", :border => 0) , edit_colleague_path(colleague) )%></b></td>
