@@ -1,22 +1,24 @@
 
 
-<div style="display: inline-block; float: center">
-  <%= link_to image_tag("icon_map_selected.png",  :alt => "View Map"),  map_colleagues_path %>
-  <%= link_to image_tag("icon_list.png", :alt => "Manage Colleagues"), colleagues_path %>
+<div style="display: inline-block; margin-right:800px">
+  <%= link_to image_tag("icon_map_selected.png"), map_colleagues_path , title: 'AppDev Map', rel: 'tooltip' %>
+  <%= link_to image_tag("icon_list.png"), colleagues_path , title: 'Colleagues List', rel: 'tooltip' %>
+  
 </div>
 
-<div style="float: right; display:inline-block; ">
 
-  <input id="name" type="text" size="40" value="Enter Colleague Name" onfocus="if(this.value=='Enter Colleague Name')this.value=''" onblur="if(this.value=='')this.value='Enter Colleague Name'" onKeydown="Javascript: if (event.keyCode==13) center();" />
-  <input style="display:inline-block vertical-align:middle" type="button" value="Search" onclick="center()" class="btn  btn-custom" >
-
-
-</div>
 
 
 
 <div class="hr"></div>
+<div style="float:right; display:inline-block; margin-top:10px">
+
+  <input  id="name" type="text" size="40" value="Enter Colleague Name" onfocus="if(this.value=='Enter Colleague Name')this.value=''" onblur="if(this.value=='')this.value='Enter Colleague Name'" onKeydown="Javascript: if (event.keyCode==13) center();" />
+  <!-- <input style="display:inline-block vertical-align:middle" type="button" value="Search" onclick="center()" class="btn  btn-custom" >
+ -->
+
 </div>
+
 <!DOCTYPE html>
 <html>
 <head>
