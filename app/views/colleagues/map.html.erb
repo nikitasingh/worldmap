@@ -136,6 +136,8 @@ function center()
       jQuery("#search_user").html("This Person is based in " +address);
 
       initializeSearch(name,address,image);
+       address="";
+    image="";
     },
     type: "get"
   });  
@@ -218,7 +220,7 @@ function createSites(geometry,address,name){
 
 
  var sites = [
- [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><b>"+name+"<br/>Based in :"+address+""+"<br/><br/><img src='"+image+"'>"]
+ [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><b>"+name+"<br/>Based in :"+address+""+"<br/><br/><img src='"+image+"'alt='Image not available'>"]
  ];
 
  return sites;
