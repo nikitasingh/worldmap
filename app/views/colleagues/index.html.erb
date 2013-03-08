@@ -1,5 +1,8 @@
-<%= link_to image_tag("icon_map.png",  :alt => "View Map"),  map_colleagues_path %>
-<%= link_to image_tag("icon_list_selected.png", :alt => "Manage Colleagues"), colleagues_path %>
+<div style="display: inline-block; margin-right:800px">
+  <%= link_to image_tag("icon_map.png"), map_colleagues_path , title: 'AppDev Map', rel: 'tooltip' %>
+  <%= link_to image_tag("icon_list_selected.png"), colleagues_path , title: 'Colleagues List', rel: 'tooltip' %>
+  
+</div>
 
 
 
@@ -40,8 +43,21 @@
         <td style="min-width:100px">
           <br/><br/>
           <b>Office Location : </b><%= colleague.location %><br/>
-          <b>E-mail : </b><%= colleague.email %><br/>
-          <b>Contact Number : </b><%= colleague.contactnum %><br/>
+
+
+          <%  if colleague.email.blank? %>
+            <b>E-mail : </b>Not Available<br/>
+          <% else %>
+            <b>E-mail : </b><%= colleague.email %><br/>
+          <% end %>
+
+          <%  if colleague.contactnum.blank? %>
+            <b>Contact Number : </b>Not Available<br/>
+          <% else %>
+            <b>Contact Number : </b><%= colleague.contactnum %><br/>
+          <% end %>
+
+
        </td>
 
        <td width="5%"><b><%= link_to(image_tag("edit2.png", :border => 0) , edit_colleague_path(colleague) )%></b></td>
