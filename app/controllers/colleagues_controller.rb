@@ -118,12 +118,22 @@ p @colleagues
  @end="}"
  @collegues.each do |colleague|
 
-  @location= @location+ @start+ 
+if colleague.attachment.blank?
+
+     @location= @location+ @start+ 
+  @place + '"'+colleague.name+'",'+
+        @image+'"'+'missing-small.png'+'"' +
+
+        @end+","
+
+      else
+ @location= @location+ @start+ 
   @place + '"'+colleague.name+'",'+
   @image+'"..'+colleague.attachment.url(:thumb)+'"' +
  
   @end+","
 
+      end
 
 
 end
@@ -190,7 +200,7 @@ end
 
         @location= @location+ @start+ 
         @place + '"'+colleague.location+'",'+
-        @image+'"'+'../assets/missing-small.png'+'"' +
+        @image+'"'+'missing-small.png'+'"' +
 
         @end+","
 
