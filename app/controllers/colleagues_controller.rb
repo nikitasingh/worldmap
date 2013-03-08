@@ -120,7 +120,7 @@ p @colleagues
 
   @location= @location+ @start+ 
   @place + '"'+colleague.name+'",'+
-  @image+'"..'+colleague.attachment.url(:small)+'"' +
+  @image+'"..'+colleague.attachment.url(:thumb)+'"' +
  
   @end+","
 
