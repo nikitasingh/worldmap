@@ -183,7 +183,7 @@ function createAllSites(data){
     site.push(2);
 
 
-    site.push("<div style='text-align:center'><b>Location : "+ value.place+"<br/>Total Number of Colleagues : "+value.count+"<br/><br/><a href='../colleagues/list?loc="+ value.place+"' target='_blank'>View List</a></div>");
+    site.push("<div style='text-align:center'><b>Location : <font color=#0B0B61 size='4px'>"+ value.place+"<br/></font>Total Number of Colleagues : <font color=#0B0B61 size='4px'>"+value.count+"</font><br/><br/><a href='../colleagues/list?loc="+ value.place+"' target='_blank'>View List</a></div>");
     sites.push(site);
   });
   return sites;
@@ -223,11 +223,11 @@ function initializeSearch(name,address,image) {
 
 }
 
-function createSites(geometry,address,name){
+function createSites(geometry,address,name,image){
 
 
  var sites = [
- [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><b>"+name+"<br/>Based in :"+address+""+"<br/><br/><img src='"+image+"'"]
+ [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><font color=#0B0B61 size='5px'><b>"+name+"</font><br/>Based in : <font color=#0B0B61>"+address+"</font>"+"<br/><br/><img src='"+image+"'>"]
  ];
 
  return sites;
