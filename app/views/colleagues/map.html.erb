@@ -47,6 +47,7 @@
 
 $(document).ready(function() {
   var availableTags=[];
+  var NoResultsLabel = "No Results";
   $.ajax({
     url: '../colleagues/autocomplete',
     error: function (XMLHttpRequest,textStatus,errorThrown) {
