@@ -74,6 +74,9 @@ $( "#name" ).autocomplete({
         return tag;
       }
     });
+       if (!matches.length) {
+                matches = [NoResultsLabel];
+            }
     response(matches);
   },
  select: function (a,b) {
@@ -193,6 +196,7 @@ function initializeSearch(name,address,image) {
   var myOptions = {
     zoom: 4,
     center: centerMap,
+    minZoom: 2, 
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
 
