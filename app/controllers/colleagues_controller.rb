@@ -102,7 +102,39 @@ class ColleaguesController < ApplicationController
       format.json { head :no_content }
     end
   end
+def locationlist
+loc=params[:loc]
 
+  
+
+ @collegues= @users=Colleague.where(:location=>loc)
+p @colleagues
+
+
+ @location="["
+ @place='"cname":'
+ @image='"image":'
+ @start="{"
+ @end="}"
+ @collegues.each do |colleague|
+
+  @location= @location+ @start+ 
+  @place + '"'+colleague.name+'",'+
+  @image+'"..'+colleague.attachment.url(:thumb)+'"' +
+ 
+  @end+","
+
+
+
+end
+@location = @location[0..@location.length-2]
+@location = @location +"]"
+p "^^^^^^^^^^^^^^^^"
+p @location
+
+render :inline =>@location
+
+end
 
   def autocomplete
 
