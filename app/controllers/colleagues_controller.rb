@@ -182,7 +182,7 @@ end
 
       if colleague.attachment.blank?
 
-        p "^^^^^^^^^^^^^^^^"
+        p "^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
         p "inside if of controller"
 
         p "^^^^^^^^^^^^^^^^"
