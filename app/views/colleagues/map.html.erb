@@ -77,7 +77,7 @@ function loadlist(location)
 
    
             $.each(jsonObj,function(key,val){
- $('<tr><td>'+'<img src='+val.image+'></td><td id="'+val.cname+'">'+val.cname+'</td></tr><tr><td colspan="2"><hr><td></tr>').appendTo('#display');
+  $('<tr><td>'+'<img src='+val.image+'></td><td id="'+val.cname+'">'+val.cname+'</td><td>'+val.project+'</td>'+'</tr><tr><td colspan="3"><hr><td></tr>').appendTo('#display');
     
 
   });

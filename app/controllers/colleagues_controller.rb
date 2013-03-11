@@ -114,35 +114,17 @@ p @colleagues
  @location="["
  @place='"cname":'
  @image='"image":'
+ @project='"project":'
  @start="{"
  @end="}"
  @collegues.each do |colleague|
 
-if colleague.attachment.blank?
-
-     @location= @location+ @start+ 
+  @location= @location+ @start+ 
   @place + '"'+colleague.name+'",'+
-        @image+'"'+'missing-small.png'+'"' +
-
-        @end+","
-
-      else
- @location= @location+ @start+ 
-  @place + '"'+colleague.name+'",'+
-  @image+'"..'+colleague.attachment.url(:thumb)+'"' +
+    @project + '"'+colleague.project+'",'+
+  @image+'"..'+colleague.attachment.url(:small)+'"' +
  
   @end+","
-
-      end
-
-
-end
-@location = @location[0..@location.length-2]
-@location = @location +"]"
-p "^^^^^^^^^^^^^^^^"
-p @location
-
-render :inline =>@location
 
 end
 
