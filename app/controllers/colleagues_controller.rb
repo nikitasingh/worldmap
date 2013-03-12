@@ -102,31 +102,32 @@ class ColleaguesController < ApplicationController
       format.json { head :no_content }
     end
   end
-def locationlist
-loc=params[:loc]
+  def locationlist
+    loc=params[:loc]
 
-  
+    
 
- @collegues= @users=Colleague.where(:location=>loc)
-p @colleagues
+    @collegues= @users=Colleague.where(:location=>loc)
+    p @colleagues
 
 
- @location="["
- @place='"cname":'
- @image='"image":'
- @project='"project":'
- @start="{"
- @end="}"
- @collegues.each do |colleague|
+    @location="["
+    @place='"cname":'
+    @image='"image":'
+    @project='"project":'
+    @start="{"
+    @end="}"
+    @collegues.each do |colleague|
 
-  @location= @location+ @start+ 
-  @place + '"'+colleague.name+'",'+
-    @project + '"'+colleague.project+'",'+
-  @image+'"..'+colleague.attachment.url(:small)+'"' +
- 
-  @end+","
+      @location= @location+ @start+ 
+      @place + '"'+colleague.name+'",'+
+      @project + '"'+colleague.project+'",'+
+      @image+'"..'+colleague.attachment.url(:small)+'"' +
+      
+      @end+","
 
-end
+    end
+  end
 
   def autocomplete
 
