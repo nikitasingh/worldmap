@@ -67,7 +67,8 @@ class ColleaguesController < ApplicationController
         format.html { redirect_to @colleague, notice: 'Colleague was successfully created.' }
         format.json { render json: @colleague, status: :created, location: @colleague }
       else
-        format.html { render action: "new" }
+       flash.now[:notice] = 'Invalid location!'
+        format.html { redirect_to new_colleague_path, notice: 'Invalid location.'}
         format.json { render json: @colleague.errors, status: :unprocessable_entity }
       end
     else

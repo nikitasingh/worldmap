@@ -3,8 +3,8 @@
 <html>
 <head>
    <title>Worldmap</title>
-    <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag    "application", "colorbox", :media => "all" %>
+    <%= javascript_include_tag "application", "jquery.colorbox" %>
     <%= csrf_meta_tags %>
 
 
@@ -18,6 +18,9 @@
 
 <div class="content">
   <div class="menubar">
+
+  	 <div class="notice hide" id="devise_notice"><%= notice%></div>
+      <div class="alert hide" id="devise_alert"><%=  alert%></div>
 
 
   <%= yield %>

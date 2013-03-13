@@ -5,9 +5,10 @@ class Colleague < ActiveRecord::Base
 
   attr_accessible :attachment
 
+
   attr_accessor :attachment,:longlat
 
-has_attached_file :attachment, :default_url => "../../../system/colleagues/attachments/small/missing.png",:styles => {
+has_attached_file :attachment, :default_url => "../../../missing-small.png",:styles => {
     :thumb=> "100x100#",
     :small  => "150x150>",
     :medium => "300x300>",
