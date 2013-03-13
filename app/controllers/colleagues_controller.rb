@@ -44,7 +44,7 @@ class ColleaguesController < ApplicationController
   def create
     @colleague = Colleague.new(params[:colleague])
     p @colleague.location
-    res = Geokit::Geocoders::GoogleGeocoder.geocode("Mumbai").ll
+    res = Geokit::Geocoders::GoogleGeocoder.geocode(@colleague.location).ll
 
     latlong= res.split(",")
 
