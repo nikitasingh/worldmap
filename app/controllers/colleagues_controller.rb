@@ -107,7 +107,7 @@ end
 
 
   def autocomplete
-    
+
     p "inside autocomplete"
 
     @colleagues=Colleague.all
@@ -143,7 +143,7 @@ end
   def locationlist
     loc=params[:loc]
 
-    
+
 
     @collegues= @users=Colleague.where(:location=>loc)
     p @colleagues
@@ -157,12 +157,34 @@ end
     @end="}"
     @collegues.each do |colleague|
 
-      @location= @location+ @start+ 
-      @place + '"'+colleague.name+'",'+
-      @project + '"'+colleague.project+'",'+
-      @image+'"..'+colleague.attachment.url(:small)+'"' +
-      
-      @end+","
+
+      if colleague.attachment.blank?
+
+        p "^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+        p "inside if of controller"
+
+        p "^^^^^^^^^^^^^^^^"
+
+
+        @location= @location+ @start+ 
+        @place + '"'+colleague.name+'",'+
+        @project + '"'+colleague.project+'",'+
+        @image+'"'+'missing-small.png'+'"' +
+
+        @end+","
+
+      else
+
+        @location= @location+ @start+ 
+        @place + '"'+colleague.name+'",'+
+        @project + '"'+colleague.project+'",'+
+        @image+'"..'+colleague.attachment.url(:small)+'"' +
+
+        @end+","
+
+      end
+
+
 
 
 
