@@ -3,7 +3,7 @@ class ColleaguesController < ApplicationController
   # GET /colleagues.json
   def index
 
-@colleagues= Colleague.all
+    @colleagues= Colleague.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @colleagues }
@@ -63,19 +63,19 @@ class ColleaguesController < ApplicationController
 
     respond_to do |format|
       if !(latlong.blank?)
-      if @colleague.save 
-        format.html { redirect_to @colleague, notice: 'Colleague was successfully created.' }
-        format.json { render json: @colleague, status: :created, location: @colleague }
-      else
-       flash.now[:notice] = 'Invalid location!'
-        format.html { redirect_to new_colleague_path, notice: 'Invalid location.'}
-        format.json { render json: @colleague.errors, status: :unprocessable_entity }
-      end
-    else
+        if @colleague.save 
+          format.html { redirect_to @colleague, notice: 'Colleague was successfully created.' }
+          format.json { render json: @colleague, status: :created, location: @colleague }
+        else
+         flash.now[:notice] = 'Invalid location!'
+         format.html { redirect_to new_colleague_path, notice: 'Invalid location.'}
+         format.json { render json: @colleague.errors, status: :unprocessable_entity }
+       end
+     else
       format.html { redirect_to new_colleague_path, notice: 'Invalid Location ..!!' }
     end
   end
-  end
+end
 
   # PUT /colleagues/1
   # PUT /colleagues/1.json
@@ -108,150 +108,164 @@ class ColleaguesController < ApplicationController
 
   def autocomplete
     
-  p "inside autocomplete"
+    p "inside autocomplete"
 
-  @colleagues=Colleague.all
- @list="["
- @name='"name":'
+    @colleagues=Colleague.all
+    @list="["
+    @name='"name":'
 
- @start="{"
- @end="}"
- @colleagues.each do |colleague|
+    @start="{"
+    @end="}"
+    @colleagues.each do |colleague|
 
-  @list= @list+ @start+ 
-  @name + '"'+colleague.name+'"'+
-  @end+","
+      @list= @list+ @start+ 
+      @name + '"'+colleague.name+'"'+
+      @end+","
 
 
-end
-@list = @list[0..@list.length-2]
-@list = @list +"]"
+    end
+    @list = @list[0..@list.length-2]
+    @list = @list +"]"
 
-render :inline =>@list
+    render :inline =>@list
 
 
   end
 
   def list
-p "$$$$$$$$$$$$$$$$$$$$$$$"
+    p "$$$$$$$$$$$$$$$$$$$$$$$"
 
 
-p params[:test]
- @colleagues1=Colleague.where(:location=>  params[:test])
+    p params[:test]
+    @colleagues1=Colleague.where(:location=>  params[:test])
 
   end
-def locationlist
-loc=params[:loc]
+  def locationlist
+    loc=params[:loc]
 
-  
+    
 
- @collegues= @users=Colleague.where(:location=>loc)
-p @colleagues
-
-
- @location="["
- @place='"cname":'
- @image='"image":'
- @project='"project":'
- @start="{"
- @end="}"
- @collegues.each do |colleague|
-
-  @location= @location+ @start+ 
-  @place + '"'+colleague.name+'",'+
-    @project + '"'+colleague.project+'",'+
-  @image+'"..'+colleague.attachment.url(:small)+'"' +
- 
-  @end+","
+    @collegues= @users=Colleague.where(:location=>loc)
+    p @colleagues
 
 
+    @location="["
+    @place='"cname":'
+    @image='"image":'
+    @project='"project":'
+    @start="{"
+    @end="}"
+    @collegues.each do |colleague|
 
-end
-@location = @location[0..@location.length-2]
-@location = @location +"]"
-p "^^^^^^^^^^^^^^^^"
-p @location
+      @location= @location+ @start+ 
+      @place + '"'+colleague.name+'",'+
+      @project + '"'+colleague.project+'",'+
+      @image+'"..'+colleague.attachment.url(:small)+'"' +
+      
+      @end+","
 
-render :inline =>@location
 
-end
+
+    end
+    @location = @location[0..@location.length-2]
+    @location = @location +"]"
+    p "^^^^^^^^^^^^^^^^"
+    p @location
+
+    render :inline =>@location
+
+  end
 
   def search
     name=params[:search]
 
-  
-
- @collegues= @users=Colleague.where(:name=>name)
-p @colleagues
 
 
- @location="["
- @place='"place":'
- @image='"image":'
- @start="{"
- @end="}"
- @collegues.each do |colleague|
+    @collegues= @users=Colleague.where(:name=>name)
+    @location="["
+    @place='"place":'
+    @image='"image":'
+    @start="{"
+    @end="}"
+    @collegues.each do |colleague|
 
-  @location= @location+ @start+ 
-  @place + '"'+colleague.location+'",'+
-  @image+'"..'+colleague.attachment.url(:small)+'"' +
- 
-  @end+","
+      if colleague.attachment.blank?
 
+        p "^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+        p "inside if of controller"
 
-
-end
-@location = @location[0..@location.length-2]
-@location = @location +"]"
-p "^^^^^^^^^^^^^^^^"
-p @location
-
-render :inline =>@location
-end
+        p "^^^^^^^^^^^^^^^^"
 
 
+        @location= @location+ @start+ 
+        @place + '"'+colleague.location+'",'+
+        @image+'"'+'missing-small.png'+'"' +
+
+        @end+","
+
+      else
+
+        @location= @location+ @start+ 
+        @place + '"'+colleague.location+'",'+
+        @image+'"..'+colleague.attachment.url(:small)+'"' +
+
+        @end+","
+
+      end
 
 
-def searchinloc
-  name=params[:search]
-  loc=params[:loc]
-  @users=Colleague.where(:name=>name,:location=>loc)
-  @users.each do |user| 
-    @name=user.name
-    @location=user.location
-    render :inline=>"" 
+    end
+    @location = @location[0..@location.length-2]
+    @location = @location +"]"
+    p "^^^^^^^^^^^^^^^^"
+    p @location
+
+    render :inline =>@location
   end
-end
-
-def allpins
-
-  p "inside allpinssss"
- @collegues=Colleague.select("DISTINCT location,longitude,latitude")
- @location="["
- @place='"place":'
- @longitude='"longitude":'
- @latitude='"latitude":'
- @countno='"count":'
- @start="{"
- @end="}"
- @collegues.each do |colleague|
-  @count=  Colleague.where(:location=> colleague.location).count 
-  @location= @location+ @start+ 
-  @place + '"'+colleague.location+'",'+
-  @longitude+'"'+colleague.longitude+'",' +
-  @latitude+'"'+colleague.latitude+'",'+
-  @countno+'"'+ @count.to_s+'"'+
-  @end+","
 
 
-end
-@location = @location[0..@location.length-2]
-@location = @location +"]"
-p "^^^^^^^^^^^^^^^^"
-p @location
 
-render :inline =>@location
-end
+
+  def searchinloc
+    name=params[:search]
+    loc=params[:loc]
+    @users=Colleague.where(:name=>name,:location=>loc)
+    @users.each do |user| 
+      @name=user.name
+      @location=user.location
+      render :inline=>"" 
+    end
+  end
+
+  def allpins
+
+    p "inside allpinssss"
+    @collegues=Colleague.select("DISTINCT location,longitude,latitude")
+    @location="["
+    @place='"place":'
+    @longitude='"longitude":'
+    @latitude='"latitude":'
+    @countno='"count":'
+    @start="{"
+    @end="}"
+    @collegues.each do |colleague|
+      @count=  Colleague.where(:location=> colleague.location).count 
+      @location= @location+ @start+ 
+      @place + '"'+colleague.location+'",'+
+      @longitude+'"'+colleague.longitude+'",' +
+      @latitude+'"'+colleague.latitude+'",'+
+      @countno+'"'+ @count.to_s+'"'+
+      @end+","
+
+
+    end
+    @location = @location[0..@location.length-2]
+    @location = @location +"]"
+    p "^^^^^^^^^^^^^^^^"
+    p @location
+
+    render :inline =>@location
+  end
 
 
 end
