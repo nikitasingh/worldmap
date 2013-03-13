@@ -169,7 +169,7 @@ end
         @location= @location+ @start+ 
         @place + '"'+colleague.name+'",'+
         @project + '"'+colleague.project+'",'+
-        @image+'"'+'missing-small.png'+'"' +
+        @image+'"'+'/assets/missing-small.png'+'"' +
 
         @end+","
 
@@ -221,7 +221,7 @@ end
 
         @location= @location+ @start+ 
         @place + '"'+colleague.location+'",'+
-        @image+'"'+'missing-small.png'+'"' +
+        @image+'"'+'/assets/missing-small.png'+'"' +
 
         @end+","
 
