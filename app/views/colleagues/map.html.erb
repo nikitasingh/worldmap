@@ -1,21 +1,21 @@
 <div class="container">
-
-<div id="example" class="modal hide fade in" style="display: none; ">
+<div id="example" class="modal hide fade in" style="display: none; width:700px ">
 
     <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3>List of colleagues</h3>
     </div>
     <div class="modal-body">
-    <p><table border='0' id="display"></table></p>
-    </div>
-    <div class="modal-footer">
-     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
- 
-    </div>
+    <p>
+<div id="test">
+
+    </p>
 </div>
-
-
+</div>
+<div class="modal-footer">
+     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+ </div>
+</div>
 </div>
 
 <div style="display: inline-block; margin-right:800px">
@@ -53,17 +53,15 @@
 
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
 <input type="hidden" value="" id="location"/> 
 <script>
 
 function loadlist(location)
 {
 
-
  var popuplist=[];
-    
+  var list;
     $.ajax({
       url: '../colleagues/locationlist?loc='+location,
       error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -75,149 +73,155 @@ function loadlist(location)
     
           var jsonObj = $.parseJSON(data);
 
-   
+    $('#test').append(' <table border="0" id="display" class="paginated"><thead><tr><th scope="col"></th><th scope="col"></th><th scope="col"></th></tr></thead><tbody>');
+
             $.each(jsonObj,function(key,val){
-  $('<tr><td>'+'<img src='+val.image+'></td><td id="'+val.cname+'">'+val.cname+'</td><td>'+val.project+'</td>'+'</tr><tr><td colspan="3"><hr><td></tr>').appendTo('#display');
-    
+ list=list+'<tr><td>'+'<img src='+val.image+'></td><td>'+val.cname+'</td><td>'+val.project+'</td>'+'</tr>';
+  
 
   });
-    
+      
   
-       
-       jQuery("#search_user").html("This Person is based in " +name);
 
-       
-        name="";
+        $('#display tbody').append(list+'</tbody></table>');
+
+
+$('#display').dataTable();
+
+      
+    name="";
     image="";
      },
      type: "get"
    });  
 $("#display tr").remove();
+$("#display thead").remove();
+$("#test").empty();
 }
-
-
-
-
 $(document).ready(function() {
   var availableTags=[];
   var NoResultsLabel = "No Results";
-  $.ajax({
-    url: '../colleagues/autocomplete',
-    error: function (XMLHttpRequest,textStatus,errorThrown) {
-      alert("Something went wrong!! Please try again later. Unable to load colleagues list");
+        $.ajax({
+          url: '../colleagues/autocomplete',
+          error: function (XMLHttpRequest,textStatus,errorThrown) {
+          alert("Something went wrong!! Please try again later. Unable to load colleagues list");
 
-    },
-    success: function(data){
+      },
+      success: function(data){
       jQuery("#search_user").html("This Person is based in " +data);
       var jsonObj = $.parseJSON(data);
       $.each(jsonObj,function(index,value){
-        availableTags.push(value.name);
+      availableTags.push(value.name);
+   
 
-
-      });
+  });
 
 
     },
     type: "get"
   });  
-
 $( "#name" ).autocomplete({
+  
   source: function( request, response ) {
     var matches = $.map( availableTags, function(tag) {
       if ( tag.toUpperCase().indexOf(request.term.toUpperCase()) === 0 ) {
         return tag;
       }
     });
-       if (!matches.length) {
+     if (!matches.length) {
                 matches = [NoResultsLabel];
             }
     response(matches);
+
   },
- select: function (a,b) {
+    select: function (a,b) {
       $(this).val(b.item.value);
      center();
     }
 });
 
-});
+//$( "#name" ).autocomplete({
+//source: availableTags
+//});
+ });
+   
+  var infowindow = null;
 
-var infowindow = null;
-
-
-function initialize() { 
- $.ajax({
-  url: '../colleagues/allpins',
-  error: function (XMLHttpRequest,textStatus,errorThrown) {
-    alert("Something went wrong!! Please try again later. Unable to load map");
-
-  },
-  success: function(data){
-
-    initializePage(data); 
-
-  },
-  type: "get"
-});  
-
-}
-
-$(document).ready(initialize);
-var address ;
-
-
-function center()
-{
-
-  name=document.getElementById("name").value;
-
-  $.ajax({
-    url: '../colleagues/search?search='+name,
-    error: function (XMLHttpRequest, textStatus, errorThrown) {
-      alert("Something went wrong!! Please try again later.");
+  function initialize() { 
+   $.ajax({
+    url: '../colleagues/allpins',
+    error: function (XMLHttpRequest,textStatus,errorThrown) {
+      alert("Something went wrong!! Please try again later. Unable to load map");
 
     },
     success: function(data){
 
+      initializePage(data); 
 
-      var jsonObj = $.parseJSON(data);
-
-
-
-      $.each(jsonObj,function(index,value){
-
-        address=value.place;
-        image=value.image;
-
-      });
-
-
-
-      jQuery("#search_user").html("This Person is based in " +address);
-
-      initializeSearch(name,address,image);
-       address="";
-    image="";
     },
     type: "get"
   });  
-}
-function initializePage(data) {
 
-  var centerMap = new google.maps.LatLng(0,0);
+ }
 
-  var myOptions = {
-    zoom: 2,
-    center: centerMap,
-    minZoom: 2, 
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+  $(document).ready(initialize);
+  var address ;
+  
+
+  function center()
+  {
+
+    name=document.getElementById("name").value;
+    
+    $.ajax({
+      url: '../colleagues/search?search='+name,
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        alert("Something went wrong!! Please try again later.");
+
+      },
+      success: function(data){
+
+    
+          
+if (data=="[]")
+{alert("No colleague with this name")}
+else
+  {
+
+    
+  var jsonObj = $.parseJSON(data);
+   $.each(jsonObj,function(index,value){
+ 
+    address=value.place;
+    image=value.image;
+
+  });
+    
+  
+       
+       jQuery("#search_user").html("This Person is based in " +address);
+  
+       initializeSearch(name,address,image);
+        address="";
+    image="";
+     }},
+     type: "get"
+   });  
   }
+  function initializePage(data) {
 
-  var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    var centerMap = new google.maps.LatLng(0,0);
 
+    var myOptions = {
+      zoom: 2,
+      center: centerMap,
+      minZoom: 2, 
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
 
-  var sites = createAllSites(data);
-  setMarkers(map, sites);
-
+    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    var sites = createAllSites(data);
+    setMarkers(map, sites);
         /*infowindow = new google.maps.InfoWindow({
                 content: "loading..."
               });*/
@@ -236,9 +240,7 @@ function createAllSites(data){
     site.push(2);
 
 
-
-    site.push("<div style='text-align:center'><b>Location : <font color=#0B0B61 size='4px'>"+ value.place+"<br/></font>Total Number of Colleagues : <font color=#0B0B61 size='4px'>"+value.count+"</font><br/><br/><a data-toggle='modal' href='#example' class='btn' onclick=loadlist('"+value.place+"');>view list</a></div>");
-
+    site.push("<div style='text-align:center'><b> Number of employees in "+ value.place+"="+value.count+"<br/>"+value.place+"<br/><a data-toggle='modal' href='#example' class='btn' onclick=loadlist('"+value.place+"');>view list</a></div>");
     sites.push(site);
   });
   return sites;
@@ -266,10 +268,11 @@ function initializeSearch(name,address,image) {
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
         //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
-
+      
         map.setCenter(results[0].geometry.location);
         var sites = createSites(results[0].geometry,address,name,image);
         setSearchMarkers(map, sites);
+
         /*infowindow = new google.maps.InfoWindow({
                 content: "loading..."
               });*/
@@ -278,11 +281,11 @@ function initializeSearch(name,address,image) {
 
 }
 
-function createSites(geometry,address,name,image){
+function createSites(geometry,address,name){
 
 
  var sites = [
- [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><font color=#0B0B61 size='5px'><b>"+name+"</font><br/>Based in : <font color=#0B0B61>"+address+"</font>"+"<br/><br/><img src='"+image+"'>"]
+ [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""+"<br/><br/><img src='"+image+"' alt='No Image uploaded'>"]
  ];
 
  return sites;
@@ -299,7 +302,7 @@ function setMarkers(map, sites) {
 
   for (var i = 0; i < sites.length; i++) {
     var site = sites[i];
-
+  
     var siteLatLng = new google.maps.LatLng(site[1], site[2]);
 
     var marker = new google.maps.Marker({
@@ -330,7 +333,7 @@ function setSearchMarkers(map, sites) {
 
   for (var i = 0; i < sites.length; i++) {
     var site = sites[i];
-
+  
     var siteLatLng = new google.maps.LatLng(site[1], site[2]);
 
     var marker = new google.maps.Marker({
@@ -362,10 +365,10 @@ function setSearchMarkers(map, sites) {
     });
     infowindow.open(map, marker);
   } 
-  google.maps.event.addListener(infowindow, 'closeclick', function() {  
+    google.maps.event.addListener(infowindow, 'closeclick', function() {  
 
     initialize(); 
-  })
+})
 
 
 }

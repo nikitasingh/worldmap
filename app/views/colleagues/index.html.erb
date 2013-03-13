@@ -9,74 +9,50 @@
 
 <div class="hr"></div>
 </div>
-<div class="list_content">
 
- <center><%= paginate @colleagues %></center>
- <table border="0">
-   <thead> 
-
-   </thead>
-   <tbody>
-     <% @colleagues.each do |colleague| %>
-     <tr >
-
-
-       <tr>
-        <%  if colleague.attachment.blank? %>
-          <td style="width:200px" >  <%= image_tag ("missing-small.png") %></td>
-        <% else %>
-          <td style="width:200px" >  <%= image_tag colleague.attachment.url(:small) %></td>
-        <% end %>
-        
-        <td style=" padding-right: 5px; padding-left: 5px; width: 200px"><b>
-          <FONT COLOR=ORANGE SIZE=4>
-          <%= colleague.name %></b></FONT><br/>
-          <%= colleague.role %><br/>
-          <%= colleague.project %><br/>
-
-
+    
+<table class="index_table" id="index_table" style="display: none width:800px;">
+     <thead>
+      <tr> 
+     <th></th>
+     <th></th>
+     <th></th>
+     <th></th>
+     <th></th>
+     
+   </tr>
+     </thead>
+      <tbody>
+   
+   <% @colleagues.each do |colleague| %>
+      <tr >
+      
+          <td width="10%"><%= image_tag colleague.attachment.url(:thumb) %></td>
+          <td><%= link_to colleague.name, colleague %><br/>
+           <%= colleague.project %><br/>
+           <%= colleague.location %><br/>
+           
+         </td>
+         <td>E-mail<br/>
+           Office<br/>
+          Mobile<br/>
+         </td>
           
+          <td width="5%"><b><%= link_to(image_tag("edit2.png", :border => 0) , edit_colleague_path(colleague) )%></b></td>
+          <td width="5%"><b><%= link_to(image_tag("remove2.png", :border => 0), colleague, confirm: 'Are you sure?', method: :delete )%></b></td>
+ </tr>
 
-        </td>
-
-
-        <td style="min-width:100px">
-          <br/><br/>
-          <b>Office Location : </b><%= colleague.location %><br/>
+           <% end %>
 
 
-          <%  if colleague.email.blank? %>
-            <b>E-mail : </b>Not Available<br/>
-          <% else %>
-            <b>E-mail : </b><%= colleague.email %><br/>
-          <% end %>
-
-          <%  if colleague.contactnum.blank? %>
-            <b>Contact Number : </b>Not Available<br/>
-          <% else %>
-            <b>Contact Number : </b><%= colleague.contactnum %><br/>
-          <% end %>
-
-
-       </td>
-
-       <td width="5%"><b><%= link_to(image_tag("edit2.png", :border => 0) , edit_colleague_path(colleague) )%></b></td>
-       <td width="5%"><b><%= link_to(image_tag("remove2.png", :border => 0), colleague, confirm: 'Are you sure?', method: :delete )%></b></td>
-     </tr>
-     <tr><td colspan="6"><div class="table_hr"></div>
-     </td></tr>
-     <% end %>
-
-
-
-   </tbody>
- </table>
- <br />
-
- <%= link_to(image_tag("add2.png", :border => 0) , new_colleague_path )%>
- <br/>
- <br/>
- <br/>
+            
+  </tbody>
+    </table>
+    <br />
+<%= link_to(image_tag("add2.png", :border => 0) , new_colleague_path )%>
+<br/>
+<br/>
+<br/>
 </div>
 <br/>
 <br/>
