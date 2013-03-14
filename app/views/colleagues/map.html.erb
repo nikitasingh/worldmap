@@ -162,6 +162,7 @@ $( "#name" ).autocomplete({
     type: "get"
   });  
 
+   
  }
 
   $(document).ready(initialize);
@@ -240,7 +241,8 @@ function createAllSites(data){
     site.push(2);
 
 
-    site.push("<div style='text-align:center'><b> Number of employees in "+ value.place+"="+value.count+"<br/>"+value.place+"<br/><a data-toggle='modal' href='#example' class='btn' onclick=loadlist('"+value.place+"');>view list</a></div>");
+    site.push("<div style='text-align:left'><b>Location : <font color=#D75600>"+ value.place+"<br/></font>Total Number of Colleagues : <font color=#D75600>"+value.count+"</font><br/><br/><a data-toggle='modal' href='#example' class='btn' onclick=loadlist('"+value.place+"');>view list</a></div>");
+
     sites.push(site);
   });
   return sites;
@@ -285,7 +287,7 @@ function createSites(geometry,address,name){
 
 
  var sites = [
- [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><b> User Name : "+name+"<br/>Based in :"+address+""+"<br/><br/><img src='"+image+"' alt='No Image uploaded'>"]
+ [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><font color=#D75600 size='5px'><b>"+name+"</font><br/>Based in : <font color=#D75600>"+address+"</font>"+"<br/><br/><img src='"+image+"'>"]
  ];
 
  return sites;
@@ -372,6 +374,9 @@ function setSearchMarkers(map, sites) {
 
 
 }
+
+
+
 
 </script>
 </head>
