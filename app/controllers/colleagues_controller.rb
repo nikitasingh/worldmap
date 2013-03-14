@@ -43,26 +43,9 @@ class ColleaguesController < ApplicationController
 
   def create
     @colleague = Colleague.new(params[:colleague])
-    p @colleague.location
-    res = Geokit::Geocoders::GoogleGeocoder.geocode(@colleague.location).ll
-
-    latlong= res.split(",")
-
-    p "********************##############**********}"
-    p latlong.blank?
-    p latlong
-
-    p "********************##############**********}"
-
-
-
-
-
-    @colleague.latitude=latlong[1]
-    @colleague.longitude=latlong[0]
+    
 
     respond_to do |format|
-      if !(latlong.blank?)
         if @colleague.save 
           format.html { redirect_to @colleague, notice: 'Colleague was successfully created.' }
           format.json { render json: @colleague, status: :created, location: @colleague }
@@ -71,10 +54,7 @@ class ColleaguesController < ApplicationController
          format.html { redirect_to new_colleague_path, notice: 'Invalid location.'}
          format.json { render json: @colleague.errors, status: :unprocessable_entity }
        end
-     else
-      format.html { redirect_to new_colleague_path, notice: 'Invalid Location ..!!' }
     end
-  end
 end
 
   # PUT /colleagues/1
@@ -108,7 +88,7 @@ end
 
   def autocomplete
 
-    p "inside autocomplete"
+    #p "inside autocomplete"
 
     @colleagues=Colleague.all
     @list="["
@@ -133,10 +113,10 @@ end
   end
 
   def list
-    p "$$$$$$$$$$$$$$$$$$$$$$$"
+    #p "$$$$$$$$$$$$$$$$$$$$$$$"
 
 
-    p params[:test]
+    #p params[:test]
     @colleagues1=Colleague.where(:location=>  params[:test])
 
   end
@@ -146,7 +126,7 @@ end
 
 
     @collegues= @users=Colleague.where(:location=>loc)
-    p @colleagues
+    #p @colleagues
 
 
     @location="["
@@ -160,16 +140,16 @@ end
 
       if colleague.attachment.blank?
 
-        p "^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-        p "inside if of controller"
+        # p "^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+        # p "inside if of controller"
 
-        p "^^^^^^^^^^^^^^^^"
+        # p "^^^^^^^^^^^^^^^^"
 
 
         @location= @location+ @start+ 
         @place + '"'+colleague.name+'",'+
         @project + '"'+colleague.project+'",'+
-        @image+'"'+'../worldmap/assets/missing-small.png'+'"' +
+        @image+'"'+'../assets/missing-small.png'+'"' +
 
         @end+","
 
@@ -191,8 +171,8 @@ end
     end
     @location = @location[0..@location.length-2]
     @location = @location +"]"
-    p "^^^^^^^^^^^^^^^^"
-    p @location
+    # p "^^^^^^^^^^^^^^^^"
+    # p @location
 
     render :inline =>@location
 
@@ -213,10 +193,10 @@ end
 
       if colleague.attachment.blank?
 
-        p "^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-        p "inside if of controller"
+        # p "^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+        # p "inside if of controller"
 
-        p "^^^^^^^^^^^^^^^^"
+        # p "^^^^^^^^^^^^^^^^"
 
 
         @location= @location+ @start+ 
@@ -239,8 +219,8 @@ end
     end
     @location = @location[0..@location.length-2]
     @location = @location +"]"
-    p "^^^^^^^^^^^^^^^^"
-    p @location
+    # p "^^^^^^^^^^^^^^^^"
+    # p @location
 
     render :inline =>@location
   end
@@ -261,7 +241,7 @@ end
 
   def allpins
 
-    p "inside allpinssss"
+    # p "inside allpinssss"
     @collegues=Colleague.select("DISTINCT location,longitude,latitude")
     @location="["
     @place='"place":'
@@ -283,8 +263,8 @@ end
     end
     @location = @location[0..@location.length-2]
     @location = @location +"]"
-    p "^^^^^^^^^^^^^^^^"
-    p @location
+    # p "^^^^^^^^^^^^^^^^"
+    # p @location
 
     render :inline =>@location
   end

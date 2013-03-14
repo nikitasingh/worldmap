@@ -1,3 +1,30 @@
+<!DOCTYPE html>
+
+<head>
+ <meta charset="utf-8" />
+ <script
+ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false">
+ </script>
+ <script>
+ alert("hi");
+ function latlong()
+ {  alert("hggi")
+ var address =  document.getElementById("address").value;
+ var geocoder = new google.maps.Geocoder();
+
+ geocoder.geocode( { 'address': address}, function(results, status) {
+  var location = results[0].geometry.location;
+  alert(location.lat() + ' ' + location.lng());
+  document.getElementById("latitude").value=location.lat();
+  document.getElementById("longitude").value=location.lng();
+});
+}
+</script>
+</head>
+
+
+
+
 <%= form_for(@colleague, :html => {:multipart => true}) do |f| %>
 <% if @colleague.errors.any? %>
 <div id="error_explanation">
@@ -13,41 +40,57 @@
 
 
 
-
 <table>
   <tr>
     <td><font size="3px">Name : </font></td>
     <td>  <%= f.text_field :name , :required => true %></td>
   </tr>
+
   <tr>
     <td><font size="3px">Role : </font></td>
     <td>  <%= f.text_field :role , :required => true %></td>
   </tr>
+
   <tr>
     <td> <font size="3px">Location : </font></td>
-    <td> <%= f.text_field :location, :required => true %></td>
+    <td> <%= f.text_field :location, :required => true,:id=>"address", :onChange => 
+    "latlong();" %></td>
   </tr>
+
+  <tr>
+    <td> <font size="3px">Latitude : </font></td>
+    <td>  <%= f.text_field :latitude ,:id=>"latitude", :required => true ,:readonly => true%></td>
+  </tr>
+
+  <tr>
+    <td> <font size="3px">Longitude : </font></td>
+    <td>  <%= f.text_field :longitude ,:id=>"longitude", :required => true ,:readonly => true%></td>
+  </tr>
+
   <tr>
     <td> <font size="3px">Project : </font></td>
     <td>  <%= f.text_field :project , :required => true %></td>
   </tr>
+
   <tr>
     <td><font size="3px">Contact Number :</td>
     <td>  <%= f.text_field :contactnum %></td>
   </tr>
+
   <tr>
     <td><font size="3px">Email ID :</td>
     <td>  <%= f.text_field :email %></td>
   </tr>
+
   <tr>
     <td><font size="3px">Attach Picture :</td>
     <td> <%= f.file_field :attachment %></td>
   </tr>
 </table>
 <br/>
- <%= f.submit "Save", :class=> 'btn btn-primary' %>
+<%= f.submit "Save", :class=> 'btn btn-primary' %>
 
-   <%= link_to 'Back', colleagues_path, :class=> 'btn' %>
+<%= link_to 'Back', colleagues_path, :class=> 'btn' %>
 
 <br/>
 <br/>
