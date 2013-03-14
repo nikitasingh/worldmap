@@ -201,7 +201,7 @@ end
 
         @location= @location+ @start+ 
         @place + '"'+colleague.location+'",'+
-        @image+'"'+'../worldmap/assets/missing-small.png'+'"' +
+        @image+'"'+'../assets/missing-small.png'+'"' +
 
         @end+","
 
