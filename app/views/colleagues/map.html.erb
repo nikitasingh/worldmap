@@ -73,7 +73,7 @@ function loadlist(location)
     
           var jsonObj = $.parseJSON(data);
 
-    $('#test').append(' <table border="0" id="display" class="paginated" style="width:600px"><thead><tr><th scope="col" style="width:200px"></th><th scope="col"style="width:200px"></th><th scope="col" style="width:200px"></th></tr></thead><tbody>');
+    $('#test').append(' <table border="0" id="display" class="paginated" style="width:600px height:700px"><thead><tr><th scope="col" style="width:200px"></th><th scope="col"style="width:200px"></th><th scope="col" style="width:200px"></th></tr></thead><tbody>');
 
             $.each(jsonObj,function(key,val){
  list=list+'<tr><td>'+'<img src='+val.image+'></td><td>'+val.cname+'</td><td>'+val.project+'</td>'+'</tr>';
@@ -236,8 +236,8 @@ function createAllSites(data){
   $.each(jsonObj,function(index,value){
     var site=[];
     site.push(value.place);
-    site.push(parseFloat(value.longitude));
     site.push(parseFloat(value.latitude));
+    site.push(parseFloat(value.longitude));
     site.push(2);
 
 
@@ -283,7 +283,7 @@ function initializeSearch(name,address,image) {
 
 }
 
-function createSites(geometry,address,name){
+function createSites(geometry,address,name,image){
 
 
  var sites = [
