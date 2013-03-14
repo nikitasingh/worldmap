@@ -56,17 +56,6 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6
     <td> <%= f.text_field :location, :required => true,:id=>"address", :onChange =>
     "latlong();" %></td>
   </tr>
-
-  <tr>
-    <td> <font size="3px">Latitude : </font></td>
-    <td> <%= f.hidden_field :latitude ,:id=>"latitude", :required => true ,:readonly => true%></td>
-  </tr>
-
-  <tr>
-    <td> <font size="3px">Longitude : </font></td>
-    <td> <%= f.hidden_field :longitude ,:id=>"longitude", :required => true ,:readonly => true%></td>
-  </tr>
-
   <tr>
     <td> <font size="3px">Project : </font></td>
     <td> <%= f.text_field :project , :required => true %></td>
@@ -85,6 +74,10 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6
   <tr>
     <td><font size="3px">Attach Picture :</td>
     <td> <%= f.file_field :attachment %></td>
+  </tr>
+   <tr>
+    <td> <%= f.hidden_field :latitude ,:id=>"latitude", :required => true ,:readonly => true%></td>
+    <td> <%= f.hidden_field :longitude ,:id=>"longitude", :required => true ,:readonly => true%></td>
   </tr>
 </table>
 <br/>
