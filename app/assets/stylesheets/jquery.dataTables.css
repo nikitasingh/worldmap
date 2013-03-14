@@ -15,7 +15,8 @@ table.dataTable thead th {
 	font-weight: bold;
 	cursor: pointer;
 	*cursor: hand;
-	  background-color: #000000;
+	text-align: left;
+	  background-color: #061F3E;
 	  color: #ffffff;
 }
 
