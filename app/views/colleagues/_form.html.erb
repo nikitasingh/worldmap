@@ -15,8 +15,8 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6
  geocoder.geocode( { 'address': address}, function(results, status) {
   var location = results[0].geometry.location;
 
-  document.getElementById("latitude").value=location.lat();
-  document.getElementById("longitude").value=location.lng();
+  document.getElementById("latitude").value=location.lng();
+  document.getElementById("longitude").value=location.lat();
 });
 }
 </script>
