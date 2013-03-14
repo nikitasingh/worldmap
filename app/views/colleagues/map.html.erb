@@ -236,8 +236,8 @@ function createAllSites(data){
   $.each(jsonObj,function(index,value){
     var site=[];
     site.push(value.place);
-    site.push(parseFloat(value.longitude));
     site.push(parseFloat(value.latitude));
+    site.push(parseFloat(value.longitude));
     site.push(2);
 
 
