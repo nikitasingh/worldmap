@@ -47,10 +47,12 @@ class ColleaguesController < ApplicationController
 
     respond_to do |format|
         if @colleague.save 
-          format.html { redirect_to @colleague, notice: 'Colleague was successfully created.' }
+
+          flash[:notice] = "Colleague was successfully created."
+          format.html { redirect_to @colleague}
           format.json { render json: @colleague, status: :created, location: @colleague }
         else
-         flash.now[:notice] = 'Invalid location!'
+         flash[:notice] = 'Invalid location!'
          format.html { redirect_to new_colleague_path, notice: 'Invalid location.'}
          format.json { render json: @colleague.errors, status: :unprocessable_entity }
        end
@@ -64,9 +66,11 @@ end
 
     respond_to do |format|
       if @colleague.update_attributes(params[:colleague])
-        format.html { redirect_to @colleague, notice: 'Colleague was successfully updated.' }
+        flash[:notice] = "Colleague was successfully Updated."
+        format.html { redirect_to @colleague}
         format.json { head :no_content }
       else
+        flash[:notice] = "Colleague was Not Updated."
         format.html { render action: "edit" }
         format.json { render json: @colleague.errors, status: :unprocessable_entity }
       end

@@ -70,7 +70,7 @@ function loadlist(location)
     
           var jsonObj = $.parseJSON(data);
 
-    $('#test').append(' <table border="0" id="display" class="paginated" style="width:600px height:700px"><thead><tr><th scope="col" style="width:200px"></th><th scope="col"style="width:200px"></th><th scope="col" style="width:200px"></th></tr></thead><tbody>');
+    $('#test').append(' <table border="0" id="display" class="paginated" style="width:600px min-height:700px"><thead><tr><th scope="col" style="width:200px"></th><th scope="col"style="width:200px">Name</th><th scope="col" style="width:200px">Project</th></tr></thead><tbody>');
 
             $.each(jsonObj,function(key,val){
  list=list+'<tr><td>'+'<img src='+val.image+'></td><td>'+val.cname+'</td><td>'+val.project+'</td>'+'</tr>';
@@ -287,7 +287,7 @@ function createSites(geometry,address,name,image){
 
 
  var sites = [
- [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><font color=#D75600 size='5px'><b>"+name+"</font><br/>Based in : <font color=#D75600>"+address+"</font>"+"<br/><br/><img src='"+image+"'>"]
+ [address, geometry.location.lat(), geometry.location.lng(), 2,"<div style='text-align:center'><font color=#D75600><b>"+name+"</font><br/>Based in : <font color=#D75600>"+address+"</font>"+"<br/><br/><img HEIGHT='150' WIDTH='150' src='"+image+"'>"]
  ];
 
  return sites;
