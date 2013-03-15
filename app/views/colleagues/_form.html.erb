@@ -13,6 +13,10 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6
  var geocoder = new google.maps.Geocoder();
 
  geocoder.geocode( { 'address': address}, function(results, status) {
+  if (results=="")
+   { alert("Location you entered was not found");
+   document.getElementById("address").focus();}
+  else
   var location = results[0].geometry.location;
 
   document.getElementById("latitude").value=location.lat();
