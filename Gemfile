@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-source 'http://dev-utility-lx07.amdc.mckinsey.com'
+
 
 gem 'rails', '3.2.12'
 
