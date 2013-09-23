@@ -4,7 +4,7 @@ require 'active_support/core_ext' #for blank?
 
 set :application, 'worldmap'
 set :app_type, 'rack'
-set :repository, 'git://githuben.intranet.mckinsey.com/ODC-Applications/WorldMap.git'
+set :repository, ''
 set :scm, 'git'
 set :local_scm_command, "git"
 set :scm_command, 'git'
@@ -21,9 +21,9 @@ define_stage :devutility do
   roles[:app].clear
   roles[:web].clear
   roles[:db].clear
-  role :app, "dev-utility-lx53.amdc.mckinsey.com", :migrations => true, :primary => true
-  role :web, "dev-utility-lx53.amdc.mckinsey.com"
-  role :db, "dev-utility-lx53.amdc.mckinsey.com", :primary => true
+  role :app, "", :migrations => true, :primary => true
+  role :web, ""
+  role :db, "", :primary => true
   set :rake, 'bundle exec rake' 
   set :scm_command, 'git'
 end
