@@ -1,6 +1,5 @@
 GEM
   remote: http://rubygems.org/
-  remote: http://dev-utility-lx07.amdc.mckinsey.com/
   specs:
     actionmailer (3.2.12)
       actionpack (= 3.2.12)
